@@ -5,32 +5,22 @@
     src="{{ url_for('static', filename='js/home.js') }}"
 ></script>
 
-<div id="pageElements" class="container align-center">
+<div id="pageElements" class="container">
     <div class="row mt-5">
-        <div class="col-md-12 title">
-            High-quality
-            <span id="homeTitle" class="text-gradient">Gakumas</span>
-            assets.<br />
-            Delivered straight from the server.
+        <div class="col-md-12 subtitle">
+            What would you do if <br />
+            a loved one
+            <span class="text-bold text-red"> collapsed </span> <br />
+            on Thanksgiving? <br />
+            A birthday party? <br />
+            A big game?
         </div>
-        <div class="col-md-12 subtitle mt-3">
-            <span>GkmasManifest revision</span>
-            <span id="homeMetadataRevision" class="text-bold"></span>
-            <span>with</span>
-            <span id="homeMetadataAbCount" class="text-bold"></span>
-            <span>assetbundles and</span>
-            <span id="homeMetadataResCount" class="text-bold"></span>
-            <span>resources. Standby.</span>
+        <div class="col-md-12 title mt-4">
+            Be prepared. <br />
+            Learn to help <br />
+            with CPR.
         </div>
     </div>
-
-    <div class="row mt-5">
-        <div class="col-md-12 subtitle text-bold">
-            <span class="text-gradient">LATEST RELEASES</span>
-        </div>
-    </div>
-
-    <div class="row mt-2 gx-3" id="homeFeaturedContainer"></div>
 </div>
 
 {% endblock %}
