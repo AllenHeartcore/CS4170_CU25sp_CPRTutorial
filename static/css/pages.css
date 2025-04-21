@@ -1,10 +1,4 @@
-#homepageElements,
-#missingpageElements {
-    margin-top: 7.5rem;
-}
-
-#searchpageElements,
-#viewpageElements {
+#pageElements {
     margin-top: 5rem;
 }
 
@@ -41,25 +35,6 @@
 
 #homeFeaturedContainer * {
     max-width: 100%;
-}
-
-/* Search */
-
-#eppValue {
-    width: 3rem;
-    text-align: center;
-    pointer-events: none;
-    opacity: 1;
-}
-
-#searchEntryCard {
-    cursor: pointer;
-    margin: 0.5rem 0;
-}
-
-#searchEntryCardImage {
-    max-height: 10rem;
-    object-fit: contain;
 }
 
 /* View */

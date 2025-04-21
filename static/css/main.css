@@ -1,7 +1,6 @@
 @import url("font.css");
-@import url("searchform.css");
-@import url("animation.css");
 @import url("pages.css");
+@import url("animation.css");
 
 html,
 body {
@@ -18,7 +17,7 @@ body {
     flex: 1;
     padding: 0;
     width: 100%;
-    font-family: "NYC Sans", sans-serif;
+    font-family: "MoMA Sans", sans-serif;
     font-size: 24px;
     font-weight: 400;
 }
@@ -27,11 +26,6 @@ body {
 
 .full-width {
     width: 100%;
-}
-
-.align-left {
-    text-align: left;
-    float: left;
 }
 
 .align-center {
@@ -57,27 +51,14 @@ body {
     width: 100% !important;
 }
 
-.col-md-1-13 {
-    flex: 0 0 auto;
-    width: calc(100% / 13);
-}
-
 /* General text */
 
 .text-size-150 * {
     font-size: 1.5rem;
 }
 
-.text-size-125-force * {
-    font-size: 1.25rem !important;
-}
-
-.text-size-75-force * {
-    font-size: 0.75rem !important;
-}
-
 .text-bold {
-    font-weight: 900;
+    font-weight: 700;
 }
 
 .text-italic {
@@ -94,13 +75,6 @@ body {
 
 .text-gray {
     color: gray;
-}
-
-.text-gradient {
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
 }
 
 /* General multimedia */

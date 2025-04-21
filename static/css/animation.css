@@ -1,4 +1,4 @@
-/* Spinners (home, search, view) */
+/* Spinners */
 
 #loadingSpinner {
     display: flex;
@@ -6,11 +6,6 @@
     align-items: center;
     margin-top: 5rem;
     height: 75vh;
-}
-
-#loadingSpinnerMedia {
-    display: flex;
-    align-items: center;
 }
 
 /* Shadows */

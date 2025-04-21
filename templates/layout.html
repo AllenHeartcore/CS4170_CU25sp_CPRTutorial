@@ -3,10 +3,10 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>GkmasObjectManager GUI</title>
+        <title>"Stay Alive": CPR Tutorial</title>
         <link
             rel="icon"
-            href="{{ url_for('static', filename='hatsuboshi.ico') }}"
+            href="{{ url_for('static', filename='img/logo.svg') }}"
             type="image/x-icon"
         />
 
@@ -48,16 +48,14 @@
                 <a class="navbar-brand" href="/">
                     <!-- display a transparent image placeholder to prevent flickering -->
                     <img
-                        src="data:image/gif;base64,R0lGODlhAQABAIEAAAAAAAAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAgEAAEEBAA7"
+                        src="{{ url_for('static', filename='img/logo.svg') }}"
                         id="navbarSticker"
                         class="me-2"
                     />
-                    <span id="navbarText" class="text-size-150">
-                        <span class="text-bold">GkmasObjectManager GUI</span>
+                    <span id="navbarText" class="fs-3">
+                        <span class="text-bold">CPR Tutorial</span>
                     </span>
                 </a>
-
-                <button id="fileButton" class="btn btn-info fs-5">File</button>
 
                 <button
                     class="navbar-toggler"
@@ -70,8 +68,6 @@
                 >
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
-                {% include 'searchform.html' %}
             </div>
         </nav>
 
@@ -82,14 +78,12 @@
             <div class="container">
                 <span class="text-muted fs-5">
                     Designed with
-                    <i class="bi bi-heart-fill text-danger mx-1 fs-6"></i> by
-                    <a href="https://allenheartcore.github.io/" target="_blank">
-                        Ziyuan "Heartcore" Chen
-                    </a>
+                    <i class="bi bi-heart-fill text-danger mx-1 fs-6"></i>
+                    by Ziyuan, Jiayi, Lingxiao
                 </span>
                 <span class="text-muted fs-5 align-right">
                     <a
-                        href="https://github.com/AllenHeartcore/GkmasObjectManager"
+                        href="https://github.com/AllenHeartcore/CS4170_CU25sp_CPRTutorial"
                         target="_blank"
                     >
                         <i class="bi bi-github text-muted fs-2"></i>
