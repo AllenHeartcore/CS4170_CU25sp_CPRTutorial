@@ -3,47 +3,47 @@
   <defs>
     <style>
       .cls-1 {
-        fill: #90481f;
+        fill: hsl(24, 65%, 35%);
       }
 
       .cls-2 {
-        fill: #eab170;
+        fill: hsl(30, 80%, 70%);
       }
 
       .cls-3 {
-        fill: #b83124;
+        fill: hsl(0, 70%, 50%);
       }
 
       .cls-4 {
-        fill: #3b6f8c;
+        fill: hsl(200, 80%, 35%);
       }
 
       .cls-5 {
-        fill: #fdfaf4;
+        fill: white;
       }
 
       .cls-6 {
-        fill: #df843b;
+        fill: hsl(30, 80%, 70%);
       }
 
       .cls-7 {
-        fill: #103344;
+        fill: hsl(200, 80%, 15%);
       }
 
       .cls-8 {
-        fill: #23536f;
+        fill: hsl(200, 80%, 35%);
       }
 
       .cls-9 {
-        fill: #cf3c26;
+        fill: hsl(0, 70%, 50%);
       }
 
       .cls-10 {
-        fill: #121d16;
+        fill: black;
       }
 
       .cls-11 {
-        fill: #e28c45;
+        fill: hsl(30, 80%, 70%);
       }
     </style>
   </defs>
