@@ -1,29 +1,37 @@
 {
     "Assess the Situation": [
-        "Ensure the environment is safe for both you and the victim.",
-        "Try to wake them by gently shaking their shoulders while checking if they’re responsive."
+        "Ensure the **environment is safe** for both you and the victim.",
+        "Try to wake them up by **gently** shaking their shoulders while checking if they're responsive."
     ],
     "Call for Help": [
-        "If the person doesn't respond, shout for help or call emergency services.",
-        "If others are nearby, ask someone to call while you begin CPR."
+        "If the person doesn't respond, **shout** for help.",
+        "Ask someone nearby to **call** emergency services."
     ],
     "Open the Airway": [
-        "Tilt the head back by placing one hand on the forehead and the other under the chin to open the airway."
+        "Tilt the victim's head back,",
+        "With one hand **on the forehead**,",
+        "And the other **under the chin**."
     ],
     "Check for Breathing": [
-        "Look for chest movement, listen for breathing, and feel for breath on the cheek.",
-        "If there's no normal breathing, proceed to the next step."
+        "**Look** for chest movement,",
+        "**Listen** for breathing,",
+        "**Feel** for breath on the cheek."
     ],
     "Begin Chest Compressions": [
-        "Place your hands on the center of the chest then your hands with your fingers intertwined by placing hand above the other and ensure that your arms straight.",
-        "Push down hard and fast."
+        "Locate the **xiphoid process**.",
+        "Place your hands on the center of the chest,",
+        "Join your hands with your fingers intertwined,",
+        "Ensure your arms are **straight**.",
+        "Push down **hard and fast**."
     ],
     "Rescue Breaths": [
-        "Give 30 chest compressions, then 2 rescue breaths.",
-        "Pinch the nose shut, seal your mouth over theirs, and gently breathe in until the chest rises—each breath should last about one second.",
-        "Repeat for the second breath."
+        "Pinch the **nose shut**,",
+        "Seal your mouth over theirs,",
+        "Gently breathe in until the chest rises.",
+        "Each breath should last about **one second**."
     ],
-    "Continue CPR": [
-        "Continue the step of 30 compressions and 2 breaths until the help arrives or there is a pulse."
+    "Don't Give Up!": [
+        "Continue with cycles of **30** compressions and **2** breaths,",
+        "Until help arrives or there is a pulse."
     ]
 }

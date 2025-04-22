@@ -30,7 +30,7 @@
         <div class="col-md-12">
             <ul>
                 {% for point in details %}
-                <li>{{ point }}</li>
+                <li>{{ point | markdown | safe}}</li>
                 {% endfor %}
             </ul>
         </div>

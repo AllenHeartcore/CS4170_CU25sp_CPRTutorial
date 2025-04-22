@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request, jsonify, Response
+from markdown import markdown
+from markupsafe import Markup
 
 import json
 from pathlib import Path
@@ -12,6 +14,14 @@ dict2list = lambda x: list(x.items())
 
 cpr_steps = dict2list(read_json("cpr_steps.json"))
 app = Flask(__name__)
+
+
+# Custom filters
+
+
+@app.template_filter("markdown")
+def markdown_filter(text):
+    return Markup(markdown(text))
 
 
 # Routes
