@@ -1,7 +1,13 @@
 from flask import Flask, render_template, request, jsonify, Response
 
 
+# Bookkeeping
+
+
 app = Flask(__name__)
+
+
+# Routes
 
 
 @app.route("/")

@@ -9,8 +9,9 @@
 }
 
 .subtitle {
-    font-size: 1.5rem;
-    line-height: 1.2;
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1;
 }
 
 /* Navbar */
