@@ -3,16 +3,13 @@
 .btn-sleek {
     position: relative;
     display: inline-block;
-    padding: 0.75em 1.5em;
+    padding: 0.5em 0.5em;
     background: #fff;
-    border-bottom: 2px solid #000;
-    border-right: 2px solid #000;
-    font-size: 1rem;
     cursor: pointer;
+    border: none;
     opacity: 1;
 
-    --offset: 0%;
-    --shadow-opacity: 0;
+    --offset: 0.5rem;
 }
 
 .btn-sleek::before {
@@ -20,18 +17,16 @@
     position: absolute;
     top: 0;
     left: 0;
-
     width: calc(100% + var(--offset));
     height: calc(100% + var(--offset));
-    opacity: var(--shadow-opacity);
 
     background: #000;
     clip-path: polygon(
         0 0,
         0 calc(100% - var(--offset)),
-        calc(var(--offset)) calc(100% + var(--offset)),
-        calc(100% + var(--offset)) calc(100% + var(--offset)),
-        calc(100% + var(--offset)) calc(var(--offset)),
+        calc(var(--offset)) 100%,
+        100% 100%,
+        100% calc(var(--offset)),
         calc(100% - var(--offset)) 0
     );
 
@@ -40,8 +35,7 @@
 }
 
 .btn-sleek:hover {
-    --offset: 1rem;
-    --shadow-opacity: 1;
+    --offset: 1.5rem;
 }
 
 /* Shadows */

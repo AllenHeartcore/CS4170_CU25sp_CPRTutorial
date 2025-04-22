@@ -2,10 +2,6 @@
     margin-top: 7.5rem;
 }
 
-.navbar {
-    background-color: hsl(0, 80%, 90%);
-}
-
 .title {
     font-size: 3rem;
     font-weight: 700;
@@ -18,6 +14,10 @@
 }
 
 /* Navbar */
+
+.navbar {
+    background-color: hsl(0, 80%, 90%);
+}
 
 #navbarNav {
     display: flex;
@@ -37,8 +37,9 @@
 
 /* Home */
 
-#homeFeaturedContainer * {
-    max-width: 100%;
+#homeButtonGroup * {
+    text-align: left;
+    font-weight: 600;
 }
 
 /* View */
