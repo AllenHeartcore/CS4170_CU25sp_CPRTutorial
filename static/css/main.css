@@ -15,7 +15,7 @@ body {
 
 .container {
     flex: 1;
-    padding: 0;
+    padding: 0 5%;
     width: 100%;
     font-family: "MoMA Sans", sans-serif;
     font-size: 24px;
@@ -71,6 +71,14 @@ body {
 
 .text-monospace {
     font-family: Consolas, monospace;
+}
+
+.text-red {
+    color: red;
+}
+
+.text-green {
+    color: green;
 }
 
 .text-gray {

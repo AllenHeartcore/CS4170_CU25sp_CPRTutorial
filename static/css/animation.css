@@ -1,11 +1,43 @@
-/* Spinners */
+/* Buttons */
 
-#loadingSpinner {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 5rem;
-    height: 75vh;
+.btn-sleek {
+    --offset: 15%;
+    position: relative;
+    display: inline-block;
+    padding: 12px 24px;
+    background: #fff;
+    border: 2px solid #000;
+    font-size: 1rem;
+    cursor: pointer;
+    z-index: 0;
+}
+
+.btn-sleek::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: calc(100% + var(--offset));
+    height: calc(100% + var(--offset));
+
+    background: #000;
+    clip-path: polygon(
+        0 0,
+        0 50%,
+        calc(var(--offset)) calc(100% + var(--offset)),
+        calc(100% + var(--offset)) calc(100% + var(--offset)),
+        calc(100% + var(--offset)) calc(var(--offset)),
+        100% 0
+    );
+
+    z-index: -1;
+    opacity: 0;
+}
+
+.btn-sleek:hover::before {
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out;
 }
 
 /* Shadows */
