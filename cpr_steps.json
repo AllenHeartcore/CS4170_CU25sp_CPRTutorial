@@ -1,0 +1,29 @@
+{
+    "Assess the Situation": [
+        "Ensure the environment is safe for both you and the victim.",
+        "Try to wake them by gently shaking their shoulders while checking if they’re responsive."
+    ],
+    "Call for Help": [
+        "If the person doesn't respond, shout for help or call emergency services.",
+        "If others are nearby, ask someone to call while you begin CPR."
+    ],
+    "Open the Airway": [
+        "Tilt the head back by placing one hand on the forehead and the other under the chin to open the airway."
+    ],
+    "Check for Breathing": [
+        "Look for chest movement, listen for breathing, and feel for breath on the cheek.",
+        "If there's no normal breathing, proceed to the next step."
+    ],
+    "Begin Chest Compressions": [
+        "Place your hands on the center of the chest then your hands with your fingers intertwined by placing hand above the other and ensure that your arms straight.",
+        "Push down hard and fast."
+    ],
+    "Rescue Breaths": [
+        "Give 30 chest compressions, then 2 rescue breaths.",
+        "Pinch the nose shut, seal your mouth over theirs, and gently breathe in until the chest rises—each breath should last about one second.",
+        "Repeat for the second breath."
+    ],
+    "Continue CPR": [
+        "Continue the step of 30 compressions and 2 breaths until the help arrives or there is a pulse."
+    ]
+}

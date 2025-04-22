@@ -1,0 +1,51 @@
+{% extends "layout.html" %} {% block content %}
+
+<script
+    type="text/javascript"
+    src="{{ url_for('static', filename='js/home.js') }}"
+></script>
+
+<!-- AJAX Interface -->
+<script>
+    let id = "{{ id }}";
+    let name = "{{ name }}";
+    let details = "{{ details }}";
+</script>
+
+<div id="pageElements" class="container">
+    <div class="row mt-5">
+        <div class="col-md-12 title">Step {{ id }}:</div>
+        <div class="col-md-12 subtitle mt-2">{{ name }}</div>
+    </div>
+
+    <div class="row mt-5">
+        <img
+            class="img-fluid mx-auto w-75"
+            src="{{ url_for('static', filename='img/step' + id + '.svg') }}"
+            alt="Step {{ id }}: {{ name }}"
+        />
+    </div>
+
+    <div class="row mt-5 fs-5">
+        <div class="col-md-12">
+            <ul>
+                {% for point in details %}
+                <li>{{ point }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="row mt-5 fs-1 lh-1">
+        <div class="col-12 d-flex justify-content-between">
+            <button class="btn-sleek" id="stepPrev">
+                <i class="bi bi-arrow-left"></i>
+            </button>
+            <button class="btn-sleek" id="stepNext">
+                <i class="bi bi-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
