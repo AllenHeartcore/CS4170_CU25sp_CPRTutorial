@@ -2,14 +2,14 @@
 
 <script
     type="text/javascript"
-    src="{{ url_for('static', filename='js/home.js') }}"
+    src="{{ url_for('static', filename='js/steps.js') }}"
 ></script>
 
 <!-- AJAX Interface -->
 <script>
-    let id = "{{ id }}";
-    let name = "{{ name }}";
-    let details = "{{ details }}";
+    let id = {{ id | int }};
+    let name = {{ name | tojson }};
+    let details = {{ details | tojson }};
 </script>
 
 <div id="pageElements" class="container">
@@ -37,11 +37,11 @@
     </div>
 
     <div class="row mt-5 fs-1 lh-1">
-        <div class="col-12 d-flex justify-content-between">
+        <div class="col-12">
             <button class="btn-sleek" id="stepPrev">
                 <i class="bi bi-arrow-left"></i>
             </button>
-            <button class="btn-sleek" id="stepNext">
+            <button class="btn-sleek float-end" id="stepNext">
                 <i class="bi bi-arrow-right"></i>
             </button>
         </div>
