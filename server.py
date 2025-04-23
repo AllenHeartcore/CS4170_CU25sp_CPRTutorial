@@ -46,7 +46,10 @@ def home():
 
 @app.route("/steps/<id>")
 def steps(id):
-    name, details = cpr_steps[int(id) - 1]
+    # could encode 'id = 8', but this is more extensible
+    # as '[id - 1]' yields the last element in list
+    id = 0 if id == "5extra" else int(id)
+    name, details = cpr_steps[id - 1]
     return render_template(
         "steps.html",
         id=id,

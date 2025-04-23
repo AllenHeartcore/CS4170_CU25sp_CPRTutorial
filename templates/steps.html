@@ -10,6 +10,7 @@
     let id = {{ id | int }};
     let name = {{ name | tojson }};
     let details = {{ details | tojson }};
+    let flag_xiphoid_seen = {{ flag_xiphoid_seen | tojson }};
 </script>
 
 <div id="pageElements" class="container d-flex flex-column">
@@ -21,7 +22,7 @@
     <div class="row mt-5">
         <img
             class="img-fluid mx-auto w-75"
-            src="{{ url_for('static', filename='img/step' + id + '.svg') }}"
+            src="{{ url_for('static', filename='img/step' ~ id ~ '.svg') }}"
             alt="Step {{ id }}: {{ name }}"
         />
     </div>
@@ -29,20 +30,36 @@
     <div class="row mt-5 fs-5">
         <div class="col-md-12">
             <ul>
-                {% for point in details %}
+                {% if id == 5 %} {% if not flag_xiphoid_seen %}
+                <li>{{ details[0] | markdown | safe}}</li>
+                {% else %}
+                <li>
+                    {{ details[0] | markdown | safe}}
+                    <span>
+                        <button
+                            class="btn-sleek mx-2 fs-5 lh-1"
+                            id="stepXiphoid"
+                        >
+                            <i class="bi bi-question-lg"></i>
+                        </button>
+                    </span>
+                </li>
+                {% for point in details[1:] %}
                 <li>{{ point | markdown | safe}}</li>
-                {% endfor %}
+                {% endfor %} {% endif %} {% else %} {% for point in details %}
+                <li>{{ point | markdown | safe}}</li>
+                {% endfor %} {% endif %}
             </ul>
         </div>
     </div>
 
     <iframe
-        width="100%"
-        style="aspect-ratio: 16/9"
-        src="https://www.youtube.com/embed/2PngCv7NjaI"
+        id="embeddedYoutubeVideo"
+        class="hide-by-default"
+        src=""
         title="YouTube video player"
         frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
         referrerpolicy="strict-origin-when-cross-origin"
         allowfullscreen
     ></iframe>
