@@ -12,8 +12,8 @@
     let details = {{ details | tojson }};
 </script>
 
-<div id="pageElements" class="container">
-    <div class="row mt-5">
+<div id="pageElements" class="container d-flex flex-column">
+    <div class="row">
         <div class="col-md-12 title">Step {{ id }}:</div>
         <div class="col-md-12 subtitle mt-2">{{ name }}</div>
     </div>
@@ -36,7 +36,7 @@
         </div>
     </div>
 
-    <div class="row mt-5 fs-1 lh-1">
+    <div class="row fs-1 lh-1 mt-auto">
         <div class="col-12">
             <button class="btn-sleek" id="stepPrev">
                 <i class="bi bi-arrow-left"></i>

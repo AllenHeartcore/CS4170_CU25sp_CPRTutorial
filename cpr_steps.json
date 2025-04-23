@@ -1,34 +1,32 @@
 {
     "Assess the Situation": [
         "Ensure the **environment is safe** for both you and the victim.",
-        "Try to wake them up by **gently** shaking their shoulders while checking if they're responsive."
+        "Try to wake them up by **gently shaking their shoulders** while checking if they're responsive."
     ],
     "Call for Help": [
-        "If the person doesn't respond, **shout** for help.",
+        "If the victim doesn't respond, **shout** for help.",
         "Ask someone nearby to **call** emergency services."
     ],
     "Open the Airway": [
-        "Tilt the victim's head back,",
-        "With one hand **on the forehead**,",
-        "And the other **under the chin**."
+        "Tilt the victim's head back.",
+        "One hand **on the forehead**,",
+        "The other **under the chin**."
     ],
     "Check for Breathing": [
         "**Look** for chest movement,",
         "**Listen** for breathing,",
-        "**Feel** for breath on the cheek."
+        "**Feel** the breath on the cheek."
     ],
     "Begin Chest Compressions": [
         "Locate the **xiphoid process**.",
-        "Place your hands on the center of the chest,",
-        "Join your hands with your fingers intertwined,",
+        "Place your hands on the center of the chest, fingers intertwined.",
         "Ensure your arms are **straight**.",
         "Push down **hard and fast**."
     ],
     "Rescue Breaths": [
         "Pinch the **nose shut**,",
         "Seal your mouth over theirs,",
-        "Gently breathe in until the chest rises.",
-        "Each breath should last about **one second**."
+        "Gently breathe in for **one second** until the chest rises."
     ],
     "Don't Give Up!": [
         "Continue with cycles of **30** compressions and **2** breaths,",
