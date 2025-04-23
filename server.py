@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, jsonify, Response
 from markdown import markdown
 from markupsafe import Markup
 
+import re
 import json
 from pathlib import Path
 
@@ -24,7 +25,9 @@ FLAG_XIPHOID_SEEN = False
 
 @app.template_filter("markdown")
 def markdown_filter(text):
-    return Markup(markdown(text))
+    md = Markup(markdown(text))
+    return re.sub(r"<p>(.*?)</p>", r"\1", md)
+    # supports same-line <span>; line sep patched in css
 
 
 # API endpoints
@@ -46,9 +49,7 @@ def home():
 
 @app.route("/steps/<id>")
 def steps(id):
-    # could encode 'id = 8', but this is more extensible
-    # as '[id - 1]' yields the last element in list
-    id = 0 if id == "5extra" else int(id)
+    id = 8 if id == "5extra" else int(id)
     name, details = cpr_steps[id - 1]
     return render_template(
         "steps.html",

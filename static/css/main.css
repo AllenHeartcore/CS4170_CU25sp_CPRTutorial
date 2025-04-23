@@ -51,6 +51,10 @@ body {
     width: 100% !important;
 }
 
+ul.increase-linesep li {
+    margin-bottom: 0.75rem;
+}
+
 /* General text */
 
 .text-size-150 * {

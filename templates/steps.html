@@ -19,6 +19,18 @@
         <div class="col-md-12 subtitle mt-2">{{ name }}</div>
     </div>
 
+    {% if (id == 5 and flag_xiphoid_seen) or (id == 8) %}
+    <iframe
+        id="embeddedYoutubeVideo"
+        class="hide-by-default"
+        src=""
+        title="YouTube video player"
+        frameborder="0"
+        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen
+    ></iframe>
+    {% else %}
     <div class="row mt-5">
         <img
             class="img-fluid mx-auto w-75"
@@ -26,10 +38,11 @@
             alt="Step {{ id }}: {{ name }}"
         />
     </div>
+    {% endif %}
 
     <div class="row mt-5 fs-5">
         <div class="col-md-12">
-            <ul>
+            <ul class="increase-linesep">
                 {% if id == 5 %} {% if not flag_xiphoid_seen %}
                 <li>{{ details[0] | markdown | safe}}</li>
                 {% else %}
@@ -51,18 +64,15 @@
                 {% endfor %} {% endif %}
             </ul>
         </div>
-    </div>
 
-    <iframe
-        id="embeddedYoutubeVideo"
-        class="hide-by-default"
-        src=""
-        title="YouTube video player"
-        frameborder="0"
-        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allowfullscreen
-    ></iframe>
+        {% if id == 5 and not flag_xiphoid_seen %}
+        <div class="col-md-12 align-center">
+            <button class="btn-sleek fs-5 w-50" id="stepXiphoid">
+                <i>Wait what?</i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
 
     <div class="row fs-1 lh-1 mt-auto">
         <div class="col-12">

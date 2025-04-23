@@ -8,9 +8,18 @@ $(document).ready(function () {
 
     if (id === 1 || id === 8) {
         $("#stepPrev").hide();
+        $("#embeddedYoutubeVideo").src =
+            "https://www.youtube.com/embed/" + XIPHOID_VIDEO_ID + "?autoplay=1";
     }
-    if (id === 5 && !flag_xiphoid_seen) {
-        $("#stepNext").hide();
+    if (id === 5) {
+        if (flag_xiphoid_seen) {
+            $("#embeddedYoutubeVideo").src =
+                "https://www.youtube.com/embed/" +
+                COMPRESSION_VIDEO_ID +
+                "?autoplay=1";
+        } else {
+            $("#stepNext").hide();
+        }
     }
 
     $("#stepPrev").click(function () {
@@ -25,5 +34,18 @@ $(document).ready(function () {
         } else {
             window.location.href = "/steps/" + (id + 1);
         }
+    });
+
+    $("#stepXiphoid").click(function () {
+        window.location.href = "/steps/8";
+        $.ajax({
+            type: "POST",
+            url: "/api/flag/xiphoid_seen",
+            success: function () {},
+            error: function (error) {
+                console.error("Error updating flag: XIPHOID_SEEN");
+                console.error(error);
+            },
+        });
     });
 });
