@@ -25,7 +25,7 @@
     </div>
 
     <!-- Top: Multimedia -->
-    <div class="row mt-5 btn-navlist">
+    <div class="row mt-5">
         {% if (id == 5 and flag_xiphoid_seen) or (id == 8) %}
         <iframe
             id="embeddedYoutubeVideo"
@@ -37,7 +37,15 @@
             allowfullscreen
         ></iframe>
         {% elif id == 7 %} {% for step in all_steps %}
-        <button class="btn-sleek mt-2 fs-5 w-75">{{ step }}</button>
+        <div class="col-md-12 btn-navlist">
+            <button
+                class="btn-sleek mb-3 fs-5 lh-1 w-75 d-flex justify-content-between"
+                onclick="window.location.href='/steps/{{loop.index}}'"
+            >
+                <span>{{ step }}</span>
+                <i class="bi bi-arrow-right"></i>
+            </button>
+        </div>
         {% endfor %} {% else %}
         <img
             class="img-fluid mx-auto w-75"
