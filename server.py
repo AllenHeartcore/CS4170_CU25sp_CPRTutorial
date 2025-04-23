@@ -1,4 +1,8 @@
-from flask import Flask, render_template, request, jsonify, Response
+from flask import (
+    Flask, render_template,
+    request, redirect, url_for,
+    jsonify, Response
+)
 from markdown import markdown
 from markupsafe import Markup
 
@@ -13,7 +17,13 @@ read_json = lambda x: json.loads(Path(x).read_text(encoding="utf-8"))
 dict2list = lambda x: list(x.items())
 
 cpr_steps = dict2list(read_json("cpr_steps.json"))
-cpr_quizzes = dict2list(read_json("cpr_quizzes.json"))
+
+def load_quizzes(path: str):
+    items = json.loads(Path(path).read_text(encoding="utf-8"))
+    return [items[k] for k in sorted(items, key=lambda k: int(items[k]["id"]))]
+cpr_quizzes = load_quizzes("cpr_quizzes.json")
+
+
 app = Flask(__name__)
 
 
@@ -43,15 +53,31 @@ def steps(id):
         details=details,
     )
 
-@app.route("/quiz/<id>")
-def quizzes(id):
-    question, choices = cpr_quizzes[int(id) - 1]
+
+
+@app.route("/quiz/<int:qid>", methods=["GET", "POST"])
+def quiz(qid):
+    total = len(cpr_quizzes)
+
+    if not (1 <= qid <= total):
+        return redirect(url_for("quiz", qid=1))
+
+    quiz_obj = cpr_quizzes[qid - 1]
+
+    if request.method == "POST":
+        # TODO: grade answers in request.form
+        return redirect(url_for("home"))
+
     return render_template(
-        "quizzes.html",
-        id=id,
-        name=name,
-        details=details,
+        "quiz.html",
+        qid=qid,
+        total=total,
+        question=quiz_obj["question"],
+        q_type=quiz_obj["type"],
+        choices=quiz_obj.get("choices", []),
     )
+
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=5001)
