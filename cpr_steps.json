@@ -1,35 +1,38 @@
 {
     "Assess the Situation": [
-        "Ensure the **environment is safe** for both you and the victim.",
-        "Try to wake them up by **gently shaking their shoulders** while checking if they're responsive."
+        "Ensure the **environment is safe** for both you and the victim",
+        "Try to wake them up by **gently shaking their shoulders** while checking if they're responsive"
     ],
     "Call for Help": [
-        "If the victim doesn't respond, **shout** for help.",
-        "Ask someone nearby to **call** emergency services."
+        "If the victim doesn't respond, **shout** for help",
+        "Ask someone nearby to **call** emergency services"
     ],
     "Open the Airway": [
-        "Tilt the victim's head back.",
-        "One hand **on the forehead**,",
-        "The other **under the chin**."
+        "Tilt the victim's head back",
+        "One hand **on the forehead**",
+        "The other **under the chin**"
     ],
     "Check for Breathing": [
-        "**Look** for chest movement,",
-        "**Listen** for breathing,",
-        "**Feel** the breath on the cheek."
+        "**Look** for chest movement",
+        "**Listen** for breathing",
+        "**Feel** the breath on the cheek"
     ],
-    "Begin Chest Compressions": [
-        "Locate the **xiphoid process**.",
-        "Place your hands on the center of the chest, fingers intertwined.",
-        "Ensure your arms are **straight**.",
-        "Push down **hard and fast**."
+    "Chest Compressions": [
+        "Find the **xiphoid process**",
+        "Hands at center of chest, arms **straight**, fingers intertwined",
+        "Push down **hard and fast**"
     ],
     "Rescue Breaths": [
-        "Pinch the **nose shut**,",
-        "Seal your mouth over theirs,",
-        "Gently breathe in for **one second** until the chest rises."
+        "Pinch the **nose shut**",
+        "Seal your mouth over theirs",
+        "Gently breathe in for **one second** until the chest rises"
     ],
     "Don't Give Up!": [
-        "Continue with cycles of **30** compressions and **2** breaths,",
-        "Until help arrives or there is a pulse."
+        "Continue with cycles of **30** compressions and **2** breaths",
+        "Until help arrives or there's pulse"
+    ],
+    "How to Locate the Xiphoid Process": [
+        "Two fingers at the **bottom of ribcage**",
+        "Slide up to the **bottom of breastbone**"
     ]
 }

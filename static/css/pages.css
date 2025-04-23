@@ -38,35 +38,14 @@
 
 /* Home */
 
-#homeButtonGroup * {
+.btn-navlist * {
     text-align: left;
     font-weight: 600;
 }
 
-/* View */
+/* Steps */
 
-#viewMedia {
-    display: flex;
-    flex-direction: column; /* stack children vertically */
+#embeddedYoutubeVideo {
     width: 100%;
-    height: auto;
     aspect-ratio: 16 / 9;
-    overflow: hidden;
-    border: 2px dotted lightgray;
-}
-
-#viewMediaContent img,
-#viewMediaContent video {
-    display: block;
-    max-width: 100%;
-    max-height: 30rem;
-    object-fit: contain;
-    object-position: center;
-}
-
-#viewMediaContent audio {
-    display: block;
-    width: 36rem;
-    object-fit: contain;
-    object-position: center;
 }

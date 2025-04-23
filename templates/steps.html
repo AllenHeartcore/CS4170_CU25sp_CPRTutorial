@@ -10,40 +10,100 @@
     let id = {{ id | int }};
     let name = {{ name | tojson }};
     let details = {{ details | tojson }};
+    let all_steps = {{ all_steps | tojson }};
+    let flag_xiphoid_seen = {{ flag_xiphoid_seen | tojson }};
 </script>
 
 <div id="pageElements" class="container d-flex flex-column">
     <div class="row">
-        <div class="col-md-12 title">Step {{ id }}:</div>
+        {% if id == 8 %}
+        <div class="col-md-12 title">Step 5 Extra</div>
+        {% else %}
+        <div class="col-md-12 title">Step {{ id }}</div>
+        {% endif %}
         <div class="col-md-12 subtitle mt-2">{{ name }}</div>
     </div>
 
+    <!-- Top: Multimedia -->
     <div class="row mt-5">
+        {% if (id == 5 and flag_xiphoid_seen) or (id == 8) %}
+        <iframe
+            id="embeddedYoutubeVideo"
+            src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"
+            title="YouTube video player"
+            frameborder="0"
+            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+        ></iframe>
+        {% elif id == 7 %} {% for step in all_steps %}
+        <div class="col-md-12 btn-navlist">
+            <button
+                class="btn-sleek mb-3 fs-5 lh-1 w-75 d-flex justify-content-between"
+                onclick="window.location.href='/steps/{{loop.index}}'"
+            >
+                <span>{{ step }}</span>
+                <i class="bi bi-arrow-right"></i>
+            </button>
+        </div>
+        {% endfor %} {% else %}
         <img
             class="img-fluid mx-auto w-75"
-            src="{{ url_for('static', filename='img/step' + id + '.svg') }}"
+            src="{{ url_for('static', filename='img/step' ~ id ~ '.svg') }}"
             alt="Step {{ id }}: {{ name }}"
         />
+        {% endif %}
     </div>
 
+    <!-- Middle: Description -->
     <div class="row mt-5 fs-5">
         <div class="col-md-12">
-            <ul>
-                {% for point in details %}
+            <ul class="increase-linesep">
+                {% if id == 5 %} {% if not flag_xiphoid_seen %}
+                <li>{{ details[0] | markdown | safe}}</li>
+                {% else %}
+                <li>
+                    {{ details[0] | markdown | safe}}
+                    <span>
+                        <button
+                            class="btn-sleek mx-2 fs-5 lh-1"
+                            id="stepXiphoid"
+                        >
+                            <i class="bi bi-question-lg"></i>
+                        </button>
+                    </span>
+                </li>
+                {% for point in details[1:] %}
                 <li>{{ point | markdown | safe}}</li>
-                {% endfor %}
+                {% endfor %} {% endif %} {% else %} {% for point in details %}
+                <li>{{ point | markdown | safe}}</li>
+                {% endfor %} {% endif %}
             </ul>
         </div>
+
+        {% if id == 5 and not flag_xiphoid_seen %}
+        <div class="col-md-12 align-center">
+            <button class="btn-sleek fs-5 w-50" id="stepXiphoid">
+                <i>Wait what?</i>
+            </button>
+        </div>
+        {% endif %}
     </div>
 
+    <!-- Bottom: Pagination -->
     <div class="row fs-1 lh-1 mt-auto">
-        <div class="col-12">
+        <div class="col-md-12">
+            {% if id != 1 %}
             <button class="btn-sleek" id="stepPrev">
                 <i class="bi bi-arrow-left"></i>
             </button>
+            {% endif %}
+            <!-- if (id == 8) or (id == 5 and !flag_xiphoid_seen): hide -->
+            {% if (id != 8) and (id != 5 or flag_xiphoid_seen) %}
             <button class="btn-sleek float-end" id="stepNext">
                 <i class="bi bi-arrow-right"></i>
             </button>
+            {% endif %}
         </div>
     </div>
 </div>
