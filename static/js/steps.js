@@ -3,11 +3,15 @@ const COMPRESSION_VID = "2PngCv7NjaI";
 
 $(document).ready(function () {
     if (id === 8) {
-        $("#embeddedYoutubeVideo").src =
-            "https://www.youtube.com/embed/" + XIPHOID_VID + "?autoplay=1";
+        $("#embeddedYoutubeVideo").attr(
+            "src",
+            "https://www.youtube.com/embed/" + XIPHOID_VID + "?autoplay=1"
+        );
     } else if (id === 5) {
-        $("#embeddedYoutubeVideo").src =
-            "https://www.youtube.com/embed/" + COMPRESSION_VID + "?autoplay=1";
+        $("#embeddedYoutubeVideo").attr(
+            "src",
+            "https://www.youtube.com/embed/" + COMPRESSION_VID + "?autoplay=1"
+        );
     }
 
     // id = 5, flag = false: 4<-

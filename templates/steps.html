@@ -15,15 +15,19 @@
 
 <div id="pageElements" class="container d-flex flex-column">
     <div class="row">
-        <div class="col-md-12 title">Step {{ id }}:</div>
+        {% if id == 8 %}
+        <div class="col-md-12 title">Step 5 Extra</div>
+        {% else %}
+        <div class="col-md-12 title">Step {{ id }}</div>
+        {% endif %}
         <div class="col-md-12 subtitle mt-2">{{ name }}</div>
     </div>
 
     {% if (id == 5 and flag_xiphoid_seen) or (id == 8) %}
     <iframe
         id="embeddedYoutubeVideo"
-        class="hide-by-default"
-        src=""
+        class="mt-5"
+        src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"
         title="YouTube video player"
         frameborder="0"
         allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
