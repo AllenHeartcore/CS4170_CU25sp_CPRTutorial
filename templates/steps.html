@@ -10,6 +10,7 @@
     let id = {{ id | int }};
     let name = {{ name | tojson }};
     let details = {{ details | tojson }};
+    let all_steps = {{ all_steps | tojson }};
     let flag_xiphoid_seen = {{ flag_xiphoid_seen | tojson }};
 </script>
 
@@ -23,27 +24,30 @@
         <div class="col-md-12 subtitle mt-2">{{ name }}</div>
     </div>
 
-    {% if (id == 5 and flag_xiphoid_seen) or (id == 8) %}
-    <iframe
-        id="embeddedYoutubeVideo"
-        class="mt-5"
-        src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"
-        title="YouTube video player"
-        frameborder="0"
-        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allowfullscreen
-    ></iframe>
-    {% else %}
-    <div class="row mt-5">
+    <!-- Top: Multimedia -->
+    <div class="row mt-5 btn-navlist">
+        {% if (id == 5 and flag_xiphoid_seen) or (id == 8) %}
+        <iframe
+            id="embeddedYoutubeVideo"
+            src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"
+            title="YouTube video player"
+            frameborder="0"
+            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+        ></iframe>
+        {% elif id == 7 %} {% for step in all_steps %}
+        <button class="btn-sleek mt-2 fs-5 w-75">{{ step }}</button>
+        {% endfor %} {% else %}
         <img
             class="img-fluid mx-auto w-75"
             src="{{ url_for('static', filename='img/step' ~ id ~ '.svg') }}"
             alt="Step {{ id }}: {{ name }}"
         />
+        {% endif %}
     </div>
-    {% endif %}
 
+    <!-- Middle: Description -->
     <div class="row mt-5 fs-5">
         <div class="col-md-12">
             <ul class="increase-linesep">
@@ -78,8 +82,9 @@
         {% endif %}
     </div>
 
+    <!-- Bottom: Pagination -->
     <div class="row fs-1 lh-1 mt-auto">
-        <div class="col-12">
+        <div class="col-md-12">
             {% if id != 1 %}
             <button class="btn-sleek" id="stepPrev">
                 <i class="bi bi-arrow-left"></i>

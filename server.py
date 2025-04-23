@@ -13,7 +13,8 @@ from pathlib import Path
 read_json = lambda x: json.loads(Path(x).read_text(encoding="utf-8"))
 dict2list = lambda x: list(x.items())
 
-cpr_steps = dict2list(read_json("cpr_steps.json"))
+cpr_steps = read_json("cpr_steps.json")
+cpr_steps_names = list(cpr_steps.keys())
 cpr_quizzes = dict2list(read_json("cpr_quizzes.json"))
 
 app = Flask(__name__)
@@ -50,13 +51,14 @@ def home():
 @app.route("/steps/<id>")
 def steps(id):
     id = 8 if id == "5extra" else int(id)
-    name, details = cpr_steps[id - 1]
+    name = cpr_steps_names[id - 1]
     return render_template(
         "steps.html",
         id=id,
         name=name,
-        details=details,
-        flag_xiphoid_seen=FLAG_XIPHOID_SEEN,
+        details=cpr_steps[name],
+        all_steps=cpr_steps_names[:6],  # for Step 7
+        flag_xiphoid_seen=FLAG_XIPHOID_SEEN,  # for Step 5/8
     )
 
 

@@ -27,7 +27,11 @@ $(document).ready(function () {
     });
 
     $("#stepNext").click(function () {
-        window.location.href = "/steps/" + (id + 1);
+        if (id === 7) {
+            window.location.href = "/";
+        } else {
+            window.location.href = "/steps/" + (id + 1);
+        }
     });
 
     $("#stepXiphoid").click(function () {

@@ -17,7 +17,7 @@
         "**Listen** for breathing",
         "**Feel** the breath on the cheek"
     ],
-    "Begin Chest Compressions": [
+    "Chest Compressions": [
         "Find the **xiphoid process**",
         "Hands at center of chest, arms **straight**, fingers intertwined",
         "Push down **hard and fast**"
@@ -29,10 +29,10 @@
     ],
     "Don't Give Up!": [
         "Continue with cycles of **30** compressions and **2** breaths",
-        "Until help arrives or there is a pulse"
+        "Until help arrives or there's pulse"
     ],
-    "Locating the Xiphoid Process": [
-        "Two fingers at **bottom of ribcage**",
-        "Slide up to **bottom of breastbone**"
+    "How to Locate the Xiphoid Process": [
+        "Two fingers at the **bottom of ribcage**",
+        "Slide up to the **bottom of breastbone**"
     ]
 }

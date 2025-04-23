@@ -38,12 +38,12 @@
 
 /* Home */
 
-#homeButtonGroup * {
+.btn-navlist * {
     text-align: left;
     font-weight: 600;
 }
 
-/* View */
+/* Steps */
 
 #embeddedYoutubeVideo {
     width: 100%;
