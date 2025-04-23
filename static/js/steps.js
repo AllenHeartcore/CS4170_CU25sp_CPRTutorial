@@ -36,14 +36,6 @@ $(document).ready(function () {
 
     $("#stepXiphoid").click(function () {
         window.location.href = "/steps/8";
-        $.ajax({
-            type: "POST",
-            url: "/api/flag/xiphoid_seen",
-            success: function () {},
-            error: function (error) {
-                console.error("Error updating flag: XIPHOID_SEEN");
-                console.error(error);
-            },
-        });
+        setFlag("XIPHOID_SEEN");
     });
 });
