@@ -14,7 +14,9 @@ dict2list = lambda x: list(x.items())
 
 cpr_steps = dict2list(read_json("cpr_steps.json"))
 cpr_quizzes = dict2list(read_json("cpr_quizzes.json"))
+
 app = Flask(__name__)
+FLAG_XIPHOID_SEEN = False
 
 
 # Custom filters
@@ -23,6 +25,15 @@ app = Flask(__name__)
 @app.template_filter("markdown")
 def markdown_filter(text):
     return Markup(markdown(text))
+
+
+# API endpoints
+
+
+@app.route("/api/flag/<flag_id>", methods=["POST"])
+def flag(flag_id):
+    globals()[f"FLAG_{flag_id.upper()}"] = True
+    return jsonify({"status": "success", "flag_id": flag_id})
 
 
 # Routes
@@ -41,7 +52,9 @@ def steps(id):
         id=id,
         name=name,
         details=details,
+        flag_xiphoid_seen=FLAG_XIPHOID_SEEN,
     )
+
 
 @app.route("/quiz/<id>")
 def quizzes(id):
@@ -52,6 +65,7 @@ def quizzes(id):
         name=name,
         details=details,
     )
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=5001)
