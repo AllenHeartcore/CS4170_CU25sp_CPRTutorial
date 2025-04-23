@@ -5,6 +5,11 @@
     src="{{ url_for('static', filename='js/home.js') }}"
 ></script>
 
+<!-- AJAX Interface -->
+<script>
+    let flag_steps_completed = {{ flag_steps_completed | tojson }};
+</script>
+
 <div id="pageElements" class="container">
     <div class="row">
         <div class="col-md-12 text-tightline">
@@ -30,10 +35,14 @@
             <button class="btn-sleek mt-5 w-75" id="home2Steps">
                 Learn the Steps
             </button>
-            <button class="btn-sleek mt-5 w-75" id="home2Rhythm">
+            <button class="btn-sleek mt-5 w-75" id="home2Rhythm"
+                {% if not flag_steps_completed %} disabled {% endif %}
+            >
                 Rhythm Training
             </button>
-            <button class="btn-sleek mt-5 w-75" id="home2Quiz">
+            <button class="btn-sleek mt-5 w-75" id="home2Quiz"
+                {% if not flag_steps_completed %} disabled {% endif %}
+            >
                 Test Your Knowledge
             </button>
         </div>

@@ -12,6 +12,8 @@ $(document).ready(function () {
             "src",
             "https://www.youtube.com/embed/" + COMPRESSION_VID + "?autoplay=1"
         );
+    } else if (id === 7) {
+        setFlag("STEPS_COMPLETED");
     }
 
     // id = 5, flag = false: 4<-

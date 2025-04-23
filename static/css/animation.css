@@ -1,15 +1,18 @@
 /* Buttons */
 
 .btn-sleek {
+    --offset: 0.5rem;
+    --accent-color: #000;
+
     position: relative;
     display: inline-block;
     padding: 0.5em 0.5em;
+
+    color: var(--accent-color);
     background: #fff;
     cursor: pointer;
     border: none;
     opacity: 1;
-
-    --offset: 0.5rem;
 }
 
 .btn-sleek::before {
@@ -20,7 +23,7 @@
     width: calc(100% + var(--offset));
     height: calc(100% + var(--offset));
 
-    background: #000;
+    background: var(--accent-color);
     clip-path: polygon(
         0 0,
         0 calc(100% - var(--offset)),
@@ -36,6 +39,12 @@
 
 .btn-sleek:hover {
     --offset: 1.5rem;
+}
+
+.btn-sleek:disabled {
+    --accent-color: lightgray;
+    cursor: not-allowed;
+    pointer-events: none;
 }
 
 /* Shadows */

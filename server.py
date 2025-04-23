@@ -19,6 +19,7 @@ cpr_quizzes = dict2list(read_json("cpr_quizzes.json"))
 
 app = Flask(__name__)
 FLAG_XIPHOID_SEEN = False
+FLAG_STEPS_COMPLETED = False
 
 
 # Custom filters
@@ -45,7 +46,10 @@ def flag(flag_id):
 
 @app.route("/")
 def home():
-    return render_template("home.html")
+    return render_template(
+        "home.html",
+        flag_steps_completed=FLAG_STEPS_COMPLETED,
+    )
 
 
 @app.route("/steps/<id>")
