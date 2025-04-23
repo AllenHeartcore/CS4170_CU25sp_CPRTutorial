@@ -13,6 +13,7 @@ read_json = lambda x: json.loads(Path(x).read_text(encoding="utf-8"))
 dict2list = lambda x: list(x.items())
 
 cpr_steps = dict2list(read_json("cpr_steps.json"))
+cpr_quizzes = dict2list(read_json("cpr_quizzes.json"))
 app = Flask(__name__)
 
 
@@ -42,6 +43,15 @@ def steps(id):
         details=details,
     )
 
+@app.route("/quiz/<id>")
+def quizzes(id):
+    question, choices = cpr_quizzes[int(id) - 1]
+    return render_template(
+        "quizzes.html",
+        id=id,
+        name=name,
+        details=details,
+    )
 
 if __name__ == "__main__":
     app.run(debug=True, port=5001)
