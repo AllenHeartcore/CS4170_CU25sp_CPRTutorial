@@ -76,12 +76,15 @@
 
     <div class="row fs-1 lh-1 mt-auto">
         <div class="col-12">
+            {% if id != 1 and id != 8 %}
             <button class="btn-sleek" id="stepPrev">
                 <i class="bi bi-arrow-left"></i>
             </button>
+            {% endif %} {% if id != 5 or flag_xiphoid_seen %}
             <button class="btn-sleek float-end" id="stepNext">
                 <i class="bi bi-arrow-right"></i>
             </button>
+            {% endif %}
         </div>
     </div>
 </div>

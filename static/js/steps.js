@@ -1,25 +1,17 @@
-const XIPHOID_VIDEO_ID = "uT3arOC9ZXc";
-const COMPRESSION_VIDEO_ID = "2PngCv7NjaI";
+const XIPHOID_VID = "uT3arOC9ZXc";
+const COMPRESSION_VID = "2PngCv7NjaI";
 
 $(document).ready(function () {
     // id = 5, flag = false: 4<-
     // id = 5, flag = true:  4<- ->6
     // id = 8, flag = any:       ->5
 
-    if (id === 1 || id === 8) {
-        $("#stepPrev").hide();
+    if (id === 8) {
         $("#embeddedYoutubeVideo").src =
-            "https://www.youtube.com/embed/" + XIPHOID_VIDEO_ID + "?autoplay=1";
-    }
-    if (id === 5) {
-        if (flag_xiphoid_seen) {
-            $("#embeddedYoutubeVideo").src =
-                "https://www.youtube.com/embed/" +
-                COMPRESSION_VIDEO_ID +
-                "?autoplay=1";
-        } else {
-            $("#stepNext").hide();
-        }
+            "https://www.youtube.com/embed/" + XIPHOID_VID + "?autoplay=1";
+    } else if (id === 5) {
+        $("#embeddedYoutubeVideo").src =
+            "https://www.youtube.com/embed/" + COMPRESSION_VID + "?autoplay=1";
     }
 
     $("#stepPrev").click(function () {
