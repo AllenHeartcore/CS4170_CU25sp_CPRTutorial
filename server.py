@@ -35,10 +35,10 @@ FLAG_STEPS_COMPLETED = False
 
 
 @app.template_filter("markdown")
-def markdown_filter(text):
-    md = Markup(markdown(text))
-    return re.sub(r"<p>(.*?)</p>", r"\1", md)
-    # supports same-line <span>; line sep patched in css
+def markdown_filter(text: str) -> Markup:
+    md = markdown(text)
+    md = re.sub(r"<p>(.*?)</p>", r"\1", md)  # supports same-line <span>
+    return Markup(md)
 
 
 # API endpoints

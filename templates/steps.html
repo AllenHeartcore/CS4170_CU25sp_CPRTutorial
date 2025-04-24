@@ -60,10 +60,10 @@
         <div class="col-md-12">
             <ul class="increase-linesep">
                 {% if id == 5 %} {% if not flag_xiphoid_seen %}
-                <li>{{ details[0] | markdown | safe}}</li>
+                <li>{{ details[0] | markdown }}</li>
                 {% else %}
                 <li>
-                    {{ details[0] | markdown | safe}}
+                    {{ details[0] | markdown }}
                     <span>
                         <button
                             class="btn-sleek mx-2 fs-5 lh-1"
@@ -74,9 +74,9 @@
                     </span>
                 </li>
                 {% for point in details[1:] %}
-                <li>{{ point | markdown | safe}}</li>
+                <li>{{ point | markdown }}</li>
                 {% endfor %} {% endif %} {% else %} {% for point in details %}
-                <li>{{ point | markdown | safe}}</li>
+                <li>{{ point | markdown }}</li>
                 {% endfor %} {% endif %}
             </ul>
         </div>
