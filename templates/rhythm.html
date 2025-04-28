@@ -1,0 +1,32 @@
+{% extends "layout.html" %} {% block content %}
+
+<script
+    type="text/javascript"
+    src="{{ url_for('static', filename='js/rhythm.js') }}"
+></script>
+
+<div id="pageElements" class="container d-flex flex-column">
+    <div class="row">
+        <div class="col-md-12 title">
+            Memorize the <br />
+            CPR rhythm!
+        </div>
+        <div class="col-md-12 subtitle mt-4">
+            The ideal range is <br />
+            100~120 presses <br />
+            per minute.
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-12 text-center">
+            <h2>Live BPM Counter</h2>
+            <div id="bpmDisplay" style="font-size: 2em; margin-bottom: 10px">
+                0 BPM
+            </div>
+            <button id="tapButton" class="btn btn-primary">Tap Here</button>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
