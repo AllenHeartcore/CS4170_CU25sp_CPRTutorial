@@ -61,6 +61,10 @@ ul.increase-linesep li {
     font-size: 1.5rem;
 }
 
+.text-regular {
+    font-weight: 400;
+}
+
 .text-bold {
     font-weight: 700;
 }

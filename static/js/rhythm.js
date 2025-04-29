@@ -52,6 +52,6 @@ $(document).ready(function () {
     const bpmDisplay = document.getElementById("bpmDisplay");
 
     tapButton.addEventListener("click", () => {
-        bpmDisplay.textContent = updateAndGetBPM().toFixed(3);
+        bpmDisplay.textContent = updateAndGetBPM().toFixed(2);
     });
 });
