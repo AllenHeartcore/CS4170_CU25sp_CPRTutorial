@@ -11,7 +11,61 @@ const QUEUE_SIZE = 16; // larger = smoother; taken from FL Studio
 
 let lastBPM = null;
 let taps = Array(QUEUE_SIZE).fill(null);
-let tapCount = 0;
+
+let fillAngle = 0;
+let targetAngle = 0;
+let startAngle = 0;
+let animStart = 0;
+const animDur = 200; // ms
+
+function setup() {
+    // 240×240px ≈ 15rem @16px
+    const canvas = createCanvas(240, 240);
+    canvas.parent("physicsCanvas");
+    angleMode(DEGREES);
+    noStroke();
+
+    // hook your button exactly as before
+    select("#tapButton").mousePressed(() => {
+        const bpm = updateAndGetBPM();
+        select("#bpmDisplay").html(bpm.toFixed(2));
+    });
+}
+
+function draw() {
+    clear();
+    translate(width / 2, height / 2);
+
+    // compute new raw fill angle from taps[]
+    const now = Date.now();
+    const validTaps = taps.filter((t) => t !== null);
+    if (validTaps.length > 1) {
+        const last = validTaps[validTaps.length - 1];
+        const prev = validTaps[validTaps.length - 2];
+        const msPerBeat = last - prev;
+        const elapsed = now - last;
+        const rawAngle = constrain((elapsed / msPerBeat) * 360, 0, 360);
+
+        if (rawAngle !== targetAngle) {
+            startAngle = fillAngle;
+            targetAngle = rawAngle;
+            animStart = millis();
+        }
+    }
+
+    // animate fillAngle → targetAngle in animDur ms
+    if (fillAngle !== targetAngle) {
+        const t = constrain((millis() - animStart) / animDur, 0, 1);
+        fillAngle = lerp(startAngle, targetAngle, t);
+    }
+
+    // draw the two sectors
+    fill("hsl(0, 100%, 65%)");
+    arc(0, 0, width, height, -90, -90 + fillAngle, PIE);
+
+    fill("hsl(0, 100%, 30%)");
+    arc(0, 0, width, height, -90 + fillAngle, 270, PIE);
+}
 
 function resetBPMAlgorithm() {
     lastBPM = null;
@@ -52,87 +106,7 @@ $(document).ready(function () {
     const tapButton = document.getElementById("tapButton");
     const bpmDisplay = document.getElementById("bpmDisplay");
 
-    // physics setup
-    const Engine = Matter.Engine,
-        Render = Matter.Render,
-        World = Matter.World,
-        Bodies = Matter.Bodies,
-        Constraint = Matter.Constraint;
-
-    const engine = Engine.create();
-    const canvas = document.getElementById("physics-canvas");
-    canvas.width = tapButton.offsetWidth;
-    canvas.height = tapButton.offsetHeight;
-
-    const render = Render.create({
-        canvas: canvas,
-        engine: engine,
-        options: {
-            width: canvas.width,
-            height: canvas.height,
-            wireframes: false,
-            background: "transparent",
-        },
-    });
-
-    // static circle body behind the scenes (invisible)
-    const circle = Bodies.circle(
-        canvas.width / 2,
-        canvas.height / 2,
-        canvas.width / 2 - 5,
-        { isStatic: true, render: { visible: false } }
-    );
-    World.add(engine.world, circle);
-
-    // run Matter.js
-    Engine.run(engine);
-    Render.run(render);
-
-    // on each tap: increment fill, animate a little physics dot dropping into place
     tapButton.addEventListener("click", () => {
-        tapCount = Math.min(tapCount + 1, QUEUE_SIZE);
-        const angle = (tapCount / QUEUE_SIZE) * 360;
-        tapButton.style.setProperty("--fill-angle", angle + "deg");
-
-        // if we reached full circle, turn green
-        if (tapCount === QUEUE_SIZE) {
-            tapButton.classList.add("full");
-        }
-
-        // spawn a small physics particle at the top edge of the button
-        const r = 5;
-        const x0 =
-            canvas.width / 2 +
-            Math.cos(-Math.PI / 2 + (angle / 180) * Math.PI) *
-                (canvas.width / 2 - r);
-        const y0 =
-            canvas.height / 2 +
-            Math.sin(-Math.PI / 2 + (angle / 180) * Math.PI) *
-                (canvas.height / 2 - r);
-        const particle = Bodies.circle(x0, y0, r, {
-            restitution: 0.9,
-            friction: 0.05,
-            render: { fillStyle: "#ff4d4d" },
-        });
-        World.add(engine.world, particle);
-
-        // attach it to the center with a spring so it “snaps” into place
-        const spring = Constraint.create({
-            bodyA: circle,
-            pointA: { x: 0, y: 0 },
-            bodyB: particle,
-            stiffness: 0.02,
-            damping: 0.1,
-        });
-        World.add(engine.world, spring);
-
-        // after a few seconds, remove the particle & spring
-        setTimeout(() => {
-            World.remove(engine.world, particle);
-            World.remove(engine.world, spring);
-        }, 2500);
-
-        // update BPM display as before
         bpmDisplay.textContent = updateAndGetBPM().toFixed(2);
     });
 });

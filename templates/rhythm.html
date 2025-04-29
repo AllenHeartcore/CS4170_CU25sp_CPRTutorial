@@ -5,8 +5,6 @@
     src="{{ url_for('static', filename='js/rhythm.js') }}"
 ></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
-
 <div id="pageElements" class="container d-flex flex-column">
     <div class="row">
         <div class="col-md-12 title">
@@ -26,10 +24,21 @@
             <div id="bpmDisplay" style="font-size: 2em; margin-bottom: 10px">
                 0.00
             </div>
-            <!-- Our special button: -->
-            <button id="tapButton" class="bpm-btn">Tap Here</button>
-            <!-- a canvas for Matter.js to render the physics (hidden behind the button) -->
-            <canvas id="physics-canvas"></canvas>
+            <!-- new container: fixed 15rem size for p5 canvas + button overlay -->
+            <div
+                id="tapContainer"
+                style="
+                    position: relative;
+                    display: inline-block;
+                    width: 15rem;
+                    height: 15rem;
+                "
+            >
+                <!-- this div becomes the p5 canvas parent -->
+                <div id="physicsCanvas"></div>
+                <!-- transparent button on top -->
+                <button id="tapButton">TAP</button>
+            </div>
         </div>
     </div>
 </div>
