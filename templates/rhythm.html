@@ -24,19 +24,8 @@
             <div id="bpmDisplay" style="font-size: 2em; margin-bottom: 10px">
                 0.00
             </div>
-            <!-- new container: fixed 15rem size for p5 canvas + button overlay -->
-            <div
-                id="tapContainer"
-                style="
-                    position: relative;
-                    display: inline-block;
-                    width: 15rem;
-                    height: 15rem;
-                "
-            >
-                <!-- this div becomes the p5 canvas parent -->
-                <div id="physicsCanvas"></div>
-                <!-- transparent button on top -->
+            <div id="tapContainer">
+                <div id="p5Canvas"></div>
                 <button id="tapButton">TAP</button>
             </div>
         </div>

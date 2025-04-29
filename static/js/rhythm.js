@@ -8,58 +8,26 @@ const RESET_THRES_TIMEOUT = 1500;
 const RESET_THRES_TIMEIN = 250; // strange naming, bruh
 
 const QUEUE_SIZE = 16; // larger = smoother; taken from FL Studio
+const ANIMATION_DUR = 200; // ms
 
 let lastBPM = null;
 let taps = Array(QUEUE_SIZE).fill(null);
 
-let fillAngle = 0;
-let targetAngle = 0;
-let startAngle = 0;
-let animStart = 0;
-const animDur = 200; // ms
-
 function setup() {
     // 240×240px ≈ 15rem @16px
     const canvas = createCanvas(240, 240);
-    canvas.parent("physicsCanvas");
+    canvas.parent("p5Canvas");
     angleMode(DEGREES);
     noStroke();
-
-    // hook your button exactly as before
-    select("#tapButton").mousePressed(() => {
-        const bpm = updateAndGetBPM();
-        select("#bpmDisplay").html(bpm.toFixed(2));
-    });
 }
 
 function draw() {
     clear();
     translate(width / 2, height / 2);
 
-    // compute new raw fill angle from taps[]
-    const now = Date.now();
-    const validTaps = taps.filter((t) => t !== null);
-    if (validTaps.length > 1) {
-        const last = validTaps[validTaps.length - 1];
-        const prev = validTaps[validTaps.length - 2];
-        const msPerBeat = last - prev;
-        const elapsed = now - last;
-        const rawAngle = constrain((elapsed / msPerBeat) * 360, 0, 360);
+    let validTaps = taps.filter((time) => time !== null);
+    let fillAngle = (validTaps.length / QUEUE_SIZE) * 360;
 
-        if (rawAngle !== targetAngle) {
-            startAngle = fillAngle;
-            targetAngle = rawAngle;
-            animStart = millis();
-        }
-    }
-
-    // animate fillAngle → targetAngle in animDur ms
-    if (fillAngle !== targetAngle) {
-        const t = constrain((millis() - animStart) / animDur, 0, 1);
-        fillAngle = lerp(startAngle, targetAngle, t);
-    }
-
-    // draw the two sectors
     fill("hsl(0, 100%, 65%)");
     arc(0, 0, width, height, -90, -90 + fillAngle, PIE);
 

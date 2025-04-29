@@ -53,30 +53,33 @@
 /* Rhythm */
 
 #tapContainer {
-    /* ensure the container stays 15rem×15rem */
+    position: relative;
+    display: inline-block;
     width: 15rem;
     height: 15rem;
 }
 
-#physicsCanvas canvas {
-    /* p5 injects <canvas> here—absolutely position it */
+#p5Canvas canvas {
     position: absolute;
     top: 0;
     left: 0;
 }
 
 #tapButton {
-    /* overlay the button on top of the canvas */
+    /* overlay on top of canvas */
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+
     border: none;
-    background: transparent;
+    background: transparent; /* pie shape handled by p5.js */
     color: white;
+
     font-size: 3em;
     font-weight: 600;
+
     cursor: pointer;
     outline: none;
 }
