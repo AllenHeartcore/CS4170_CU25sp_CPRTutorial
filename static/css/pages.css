@@ -49,3 +49,40 @@
     width: 100%;
     aspect-ratio: 16 / 9;
 }
+
+/* Rhythm */
+
+/* make it a perfect circle, dark red background */
+.bpm-btn {
+    --fill-angle: 0deg; /* will be updated by JS */
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border: none;
+    border-radius: 50%;
+    background-color: darkred;
+    color: white;
+    font-size: 1.2em;
+    cursor: pointer;
+    outline: none;
+    /* draw the filling sector on top */
+    background-image: conic-gradient(
+        #ff4d4d 0deg var(--fill-angle),
+        darkred var(--fill-angle) 360deg
+    );
+    transition: background-color 0.5s;
+}
+
+/* full circle → switch to green */
+.bpm-btn.full {
+    background-image: none;
+    background-color: green;
+}
+
+/* position the physics canvas exactly behind the button */
+#physics-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
