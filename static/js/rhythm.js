@@ -13,22 +13,26 @@ const QUEUE_SIZE = 16; // larger = smoother; taken from FL Studio
 
 /* ------------------------------ Constants for p5.js animation */
 
-const DARK_GREEN = "hsl(120, 80%, 25%)";
-const BRIGHT_GREEN = "hsl(120, 80%, 50%)";
 const DARK_RED = "hsl(0, 100%, 30%)";
 const BRIGHT_RED = "hsl(0, 100%, 65%)";
+const DARK_GREEN = "hsl(120, 80%, 25%)";
+const BRIGHT_GREEN = "hsl(120, 80%, 50%)";
+const DARK_BLUE = "hsl(240, 70%, 35%)";
 
 // 240*240px ≈ 15rem @16px
 const CANVAS_SIZE = 16 * 15;
+const TIMER_SIZE_INNER = 15.2 * 15; // outer = canvas size
 const BUTTON_SIZE_IDLE = 12.8 * 15;
 const BUTTON_SIZE_ACTIVE = 14.4 * 15;
 
+const TIMER_DUR = 20000; // 120 BPM * 30 times, +33% buffer
 const ANIM_DUR_PIE = 100; // ms
 const ANIM_DUR_BOUNCE = 100;
 
 /* ------------------------------ Bookkeeping variables */
 
 let taps = Array(QUEUE_SIZE).fill(null);
+let firstTap = null;
 let lastBPM = null;
 let fillAngle = 0;
 
@@ -80,15 +84,30 @@ function draw() {
     arc(0, 0, buttonSize, buttonSize, -90, 270, PIE);
     fill(colorFg);
     arc(0, 0, buttonSize, buttonSize, -90, -90 + fillAngle, PIE);
+
+    push();
+    // strokes are sticky, so instead of scattering noStroke()
+    // all over the place, we put this special case in "brackets"
+    let R = CANVAS_SIZE / 2;
+    let r = TIMER_SIZE_INNER / 2;
+    let timerAngle = ((now - firstTap) / TIMER_DUR) * 360;
+    noFill();
+    stroke(DARK_BLUE);
+    strokeWeight(R - r);
+    arc(0, 0, R + r, R + r, -90, 270 - timerAngle);
+    pop();
 }
 
 /* ------------------------------ BPM functions */
 
 function resetBPMAlgorithm() {
     lastBPM = null;
+    const now = Date.now();
+
+    firstTap = now;
     taps.fill(null);
     taps.shift();
-    taps.push(Date.now()); // warm restart;
+    taps.push(now); // warm restart;
     // otherwise counter zeros out for 2 taps
 }
 
@@ -115,6 +134,11 @@ function updateAndGetBPM() {
             BPM = 0;
             resetBPMAlgorithm();
         }
+    } else {
+        firstTap = now;
+        // this may very well get pushed out of the queue,
+        // which is perfectly fine, since both the timer
+        // and the "overall average" feedback depend on it
     }
 
     return BPM;
