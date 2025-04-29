@@ -1,6 +1,13 @@
-// if new BPM is outside +-25% of the previous value, reset algorithm
-const RESET_THRES = 0.25;
-const QUEUE_SIZE = 16; // larger = smoother
+// if new BPM is outside +-20% of the previous value, reset algorithm
+const RESET_THRES_BPMPCT = 0.2;
+
+// if the next tap doesn't arrive within 1.5 seconds, reset algorithm
+const RESET_THRES_TIMEOUT = 1500;
+
+// and the lower bound counterpart, together restricting BPM to 40-240 (metronome range)
+const RESET_THRES_TIMEIN = 250; // strange naming, bruh
+
+const QUEUE_SIZE = 16; // larger = smoother; taken from FL Studio
 
 let lastBPM = null;
 let taps = Array(QUEUE_SIZE).fill(null);
@@ -27,13 +34,16 @@ function updateAndGetBPM() {
 
         lastBPM = lastBPM || BPM; // edge case
 
-        if (Math.abs(BPM - lastBPM) > lastBPM * RESET_THRES) {
+        if (
+            Math.abs(BPM - lastBPM) > lastBPM * RESET_THRES_BPMPCT ||
+            now - validTaps[validTaps.length - 2] > RESET_THRES_TIMEOUT ||
+            now - validTaps[validTaps.length - 2] < RESET_THRES_TIMEIN
+        ) {
             BPM = 0;
             resetBPMAlgorithm();
         }
     }
 
-    console.log(taps);
     return BPM;
 }
 
