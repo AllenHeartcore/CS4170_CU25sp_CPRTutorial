@@ -1,3 +1,5 @@
+/* ------------------------------ Constants for BPM algorithm */
+
 // if new BPM is outside +-20% of the previous value, reset algorithm
 const RESET_THRES_BPMPCT = 0.2;
 
@@ -8,15 +10,29 @@ const RESET_THRES_TIMEOUT = 1500;
 const RESET_THRES_TIMEIN = 250; // strange naming, bruh
 
 const QUEUE_SIZE = 16; // larger = smoother; taken from FL Studio
-const ANIMATION_DUR = 100; // ms
+
+/* ------------------------------ Constants for p5.js animation */
+
+const DARK_GREEN = "hsl(120, 80%, 25%)";
+const BRIGHT_GREEN = "hsl(120, 80%, 50%)";
+const DARK_RED = "hsl(0, 100%, 30%)";
+const BRIGHT_RED = "hsl(0, 100%, 65%)";
+
+// 240×240px ≈ 15rem @16px
+const CANVAS_SIZE = 16 * 15;
+
+const ANIM_DUR_PIE = 100; // ms
+
+/* ------------------------------ Bookkeeping variables */
 
 let taps = Array(QUEUE_SIZE).fill(null);
 let lastBPM = null;
 let fillAngle = 0;
 
+/* ------------------------------ p5.js functions */
+
 function setup() {
-    // 240×240px ≈ 15rem @16px
-    const canvas = createCanvas(240, 240);
+    const canvas = createCanvas(CANVAS_SIZE, CANVAS_SIZE);
     canvas.parent("p5Canvas");
     angleMode(DEGREES);
     noStroke();
@@ -31,18 +47,18 @@ function draw() {
     fillAngle = lerp(
         fillAngle,
         targetAngle,
-        Math.min(1, deltaTime / ANIMATION_DUR)
+        Math.min(1, deltaTime / ANIM_DUR_PIE)
     );
 
     let colorBg, colorFg;
     // the color scheme should turn green
     // when the last gap is **starting** to close
     if (fillAngle > ((QUEUE_SIZE - 1) / QUEUE_SIZE) * 360) {
-        colorBg = "hsl(120, 80%, 25%)"; // dark green
-        colorFg = "hsl(120, 80%, 50%)"; // bright green
+        colorBg = DARK_GREEN;
+        colorFg = BRIGHT_GREEN;
     } else {
-        colorBg = "hsl(0, 100%, 30%)"; // dark red
-        colorFg = "hsl(0, 100%, 65%)"; // bright red
+        colorBg = DARK_RED;
+        colorFg = BRIGHT_RED;
     }
 
     fill(colorBg);
@@ -50,6 +66,8 @@ function draw() {
     fill(colorFg);
     arc(0, 0, width, height, -90, -90 + fillAngle, PIE);
 }
+
+/* ------------------------------ BPM functions */
 
 function resetBPMAlgorithm() {
     lastBPM = null;
@@ -83,6 +101,8 @@ function updateAndGetBPM() {
 
     return BPM;
 }
+
+/* ------------------------------ Main */
 
 $(document).ready(function () {
     const tapButton = document.getElementById("tapButton");
