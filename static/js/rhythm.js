@@ -18,10 +18,13 @@ const BRIGHT_GREEN = "hsl(120, 80%, 50%)";
 const DARK_RED = "hsl(0, 100%, 30%)";
 const BRIGHT_RED = "hsl(0, 100%, 65%)";
 
-// 240×240px ≈ 15rem @16px
+// 240*240px ≈ 15rem @16px
 const CANVAS_SIZE = 16 * 15;
+const BUTTON_SIZE_IDLE = 12.8 * 15;
+const BUTTON_SIZE_ACTIVE = 14.4 * 15;
 
 const ANIM_DUR_PIE = 100; // ms
+const ANIM_DUR_BOUNCE = 100;
 
 /* ------------------------------ Bookkeeping variables */
 
@@ -41,11 +44,12 @@ function setup() {
 function draw() {
     clear();
     translate(width / 2, height / 2);
+    const now = Date.now();
 
     let validTaps = taps.filter((time) => time !== null);
     let targetAngle = (validTaps.length / QUEUE_SIZE) * 360;
     fillAngle = lerp(
-        fillAngle,
+        fillAngle, // implies exponential curve
         targetAngle,
         Math.min(1, deltaTime / ANIM_DUR_PIE)
     );
@@ -61,10 +65,21 @@ function draw() {
         colorFg = BRIGHT_RED;
     }
 
+    let buttonSize = BUTTON_SIZE_IDLE;
+    let lastTap = validTaps[validTaps.length - 1];
+    let progress = (now - lastTap) / ANIM_DUR_BOUNCE;
+    if (progress < 1) {
+        buttonSize = lerp(
+            BUTTON_SIZE_ACTIVE,
+            BUTTON_SIZE_IDLE,
+            abs(progress - 0.5) * 2
+        );
+    }
+
     fill(colorBg);
-    arc(0, 0, width, height, -90, 270, PIE);
+    arc(0, 0, buttonSize, buttonSize, -90, 270, PIE);
     fill(colorFg);
-    arc(0, 0, width, height, -90, -90 + fillAngle, PIE);
+    arc(0, 0, buttonSize, buttonSize, -90, -90 + fillAngle, PIE);
 }
 
 /* ------------------------------ BPM functions */
@@ -72,6 +87,9 @@ function draw() {
 function resetBPMAlgorithm() {
     lastBPM = null;
     taps.fill(null);
+    taps.shift();
+    taps.push(Date.now()); // warm restart;
+    // otherwise counter zeros out for 2 taps
 }
 
 function updateAndGetBPM() {
