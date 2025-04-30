@@ -32,6 +32,7 @@ const ANIM_DUR_BOUNCE = 100;
 /* ------------------------------ Bookkeeping variables */
 
 let taps = Array(QUEUE_SIZE).fill(null);
+let ntaps = 0; // counts all taps, for display, may exceed QUEUE_SIZE
 let firstTap = null;
 let lastBPM = null;
 let fillAngle = 0;
@@ -50,6 +51,7 @@ function draw() {
     translate(width / 2, height / 2);
     const now = Date.now();
 
+    /* target & animation progress */
     let validTaps = taps.filter((time) => time !== null);
     let targetAngle = (validTaps.length / QUEUE_SIZE) * 360;
     fillAngle = lerp(
@@ -58,6 +60,7 @@ function draw() {
         Math.min(1, deltaTime / ANIM_DUR_PIE)
     );
 
+    /* color scheme */
     let colorBg, colorFg;
     // the color scheme should turn green
     // when the last gap is **starting** to close
@@ -69,6 +72,7 @@ function draw() {
         colorFg = BRIGHT_RED;
     }
 
+    /* button bounce state */
     let buttonSize = BUTTON_SIZE_IDLE;
     let lastTap = validTaps[validTaps.length - 1];
     let progress = (now - lastTap) / ANIM_DUR_BOUNCE;
@@ -80,41 +84,54 @@ function draw() {
         );
     }
 
+    /* draw progress arcs */
     fill(colorBg);
     arc(0, 0, buttonSize, buttonSize, -90, 270, PIE);
     fill(colorFg);
     arc(0, 0, buttonSize, buttonSize, -90, -90 + fillAngle, PIE);
 
+    /* timer */
+    let R = CANVAS_SIZE / 2;
+    let r = TIMER_SIZE_INNER / 2;
+    let timeLeft = TIMER_DUR - (now - firstTap);
+    let timerAngle = (timeLeft / TIMER_DUR) * 360;
+    $("#timeDisplay").text((timeLeft / 1000).toFixed(1));
+
+    /* draw timer stroke */
     push();
     // strokes are sticky, so instead of scattering noStroke()
     // all over the place, we put this special case in "brackets"
-    let R = CANVAS_SIZE / 2;
-    let r = TIMER_SIZE_INNER / 2;
-    let timerAngle = ((now - firstTap) / TIMER_DUR) * 360;
     noFill();
     stroke(DARK_BLUE);
     strokeWeight(R - r);
-    arc(0, 0, R + r, R + r, -90, 270 - timerAngle);
+    arc(0, 0, R + r, R + r, -90, -90 + timerAngle);
     pop();
 }
 
 /* ------------------------------ BPM functions */
 
 function resetBPMAlgorithm() {
-    lastBPM = null;
     const now = Date.now();
-
-    firstTap = now;
     taps.fill(null);
     taps.shift();
     taps.push(now); // warm restart;
     // otherwise counter zeros out for 2 taps
+
+    ntaps = 1;
+    firstTap = now;
+    lastBPM = null;
 }
 
-function updateAndGetBPM() {
+function updateBPMDisplay(BPM) {
+    $("#bpmDisplay").text(BPM.toFixed(2));
+    $("#tapsDisplay").text(ntaps.toString());
+}
+
+function updateBPM() {
     const now = Date.now();
     taps.shift();
     taps.push(now);
+    ntaps += 1;
 
     let validTaps = taps.filter((time) => time !== null);
     let BPM = 0;
@@ -141,16 +158,11 @@ function updateAndGetBPM() {
         // and the "overall average" feedback depend on it
     }
 
-    return BPM;
+    updateBPMDisplay(BPM);
 }
 
 /* ------------------------------ Main */
 
 $(document).ready(function () {
-    const tapButton = document.getElementById("tapButton");
-    const bpmDisplay = document.getElementById("bpmDisplay");
-
-    tapButton.addEventListener("click", () => {
-        bpmDisplay.textContent = updateAndGetBPM().toFixed(2);
-    });
+    $("#tapButton").click(updateBPM);
 });

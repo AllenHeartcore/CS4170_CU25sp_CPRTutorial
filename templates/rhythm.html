@@ -18,12 +18,22 @@
         </div>
     </div>
 
+    <div class="row mt-5 text-bold gx-0 lh-sm">
+        <div class="col-4">
+            <div class="bpmstat-key">Taps</div>
+            <div id="tapsDisplay" class="bpmstat-value">0</div>
+        </div>
+        <div class="col-6">
+            <div class="bpmstat-key">BPM</div>
+            <div id="bpmDisplay" class="bpmstat-value">0.00</div>
+        </div>
+        <div class="col-2">
+            <div class="bpmstat-key">Time</div>
+            <div id="timeDisplay" class="bpmstat-value">0</div>
+        </div>
+    </div>
     <div class="row mt-5">
-        <div class="col-md-12 text-center">
-            <h2>Live BPM Counter</h2>
-            <div id="bpmDisplay" style="font-size: 2em; margin-bottom: 10px">
-                0.00
-            </div>
+        <div class="col-12 text-center">
             <div id="tapContainer">
                 <div id="p5Canvas"></div>
                 <button id="tapButton">TAP</button>

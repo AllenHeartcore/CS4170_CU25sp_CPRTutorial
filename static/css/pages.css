@@ -52,6 +52,18 @@
 
 /* Rhythm */
 
+.bpmstat-key {
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.bpmstat-value {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
 #tapContainer {
     position: relative;
     display: inline-block;
