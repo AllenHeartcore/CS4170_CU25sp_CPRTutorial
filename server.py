@@ -96,6 +96,7 @@ def quiz(qid):
         question=quiz_obj["question"],
         q_type=quiz_obj["type"],
         choices=quiz_obj.get("choices", []),
+        answer=quiz_obj["answer"],
     )
 
 

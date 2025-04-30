@@ -69,6 +69,6 @@
     "id": 7,
     "question": "Don't Give Up!  Continue cycles of __ compressions and __ breaths.",
     "type": "fill",
-    "answer": "30 compressions and 2 breaths"
+    "answer": [30, 2]
   }
 }
