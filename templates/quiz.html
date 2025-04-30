@@ -1,9 +1,10 @@
-{% extends "layout.html" %} {% block content %}
+{% extends "layout.html" %}
+{% block content %}
 
-<script
-  type="text/javascript"
-  src="{{ url_for('static', filename='js/quiz.js') }}"
-></script>
+<script 
+    type="text/javascript" 
+    src="{{ url_for('static', filename='js/quiz.js') }}">
+</script>
 
 <script>
   // expose quiz metadata to quiz.js
@@ -12,17 +13,15 @@
   let qType = "{{ q_type }}";
 </script>
 
-<div
-  id="pageElements"
-  class="container d-flex flex-column"
-  style="min-height: calc(100vh - 4rem)"
->
+<div id="pageElements" class="container" style="min-height: calc(100vh - 4rem);">
   <!-- question header -->
   <div class="row">
-    <div class="col-12 title text-center">
+    <div class="col-12 text-start" id="question_title" style="line-height: 1.5;">
       Question {{ qid }} of {{ total }}
     </div>
-    <div class="col-12 subtitle text-center mt-2">{{ question }}</div>
+    <div class="col-12 subtitle text-start mt-2" id="question_content" style="font-size: 1rem; font-weight: normal;">
+      {{ question }}
+    </div>
   </div>
 
   <!-- answer form -->
@@ -30,26 +29,28 @@
     id="quizForm"
     method="post"
     action="{{ url_for('quiz', qid=qid) }}"
-    class="row flex-grow-1 mt-4 d-flex flex-column justify-content-center align-items-center gap-4"
+    class="row mt-4 d-flex flex-column align-items-center gap-2"
     novalidate
   >
-    {% if q_type in ['single','multi'] %} {% for choice in choices %}
-    <label class="form-check shadow-at-hover p-3 rounded w-100">
+    {% if q_type in ['single','multi'] %}
+      {% for choice in choices %}
+        <label class="d-flex align-items-center ps-0 w-100" id="choice">
+          <input
+            type="{{ 'radio' if q_type=='single' else 'checkbox' }}"
+            name="answer"
+            value="{{ loop.index }}"
+            style="transform: scale(0.8); vertical-align: middle; margin-right: 0.5rem;"
+          />
+          <span>{{ choice }}</span>
+        </label>
+      {% endfor %}
+    {% else %}
       <input
-        class="form-check-input me-2"
-        type="{{ 'radio' if q_type=='single' else 'checkbox' }}"
-        name="answer"
-        value="{{ loop.index }}"
+        type="text"
+        name="answer_text"
+        class="form-control shadow-at-hover p-3 w-100"
+        placeholder="Type your answer…"
       />
-      {{ choice }}
-    </label>
-    {% endfor %} {% else %}
-    <input
-      type="text"
-      name="answer_text"
-      class="form-control shadow-at-hover p-3 w-100"
-      placeholder="Type your answer…"
-    />
     {% endif %}
 
     <!-- navigation buttons -->

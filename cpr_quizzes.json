@@ -8,12 +8,14 @@
       "30 compressions",
       "50 compressions",
       "100 compressions"
-    ]
+    ],
+    "answer": 1
   },
   "2": {
     "id": 2,
     "question": "CPR stands for ______.",
-    "type": "fill"
+    "type": "fill",
+    "answer": "Cardiopulmonary resuscitation"
   },
   "3": {
     "id": 3,
@@ -24,7 +26,8 @@
       "Place both hands under the chin only",
       "One hand on the forehead and the other under the chin",
       "Keep the victim's mouth completely closed"
-    ]
+    ],
+    "answer": 
   },
   "4": {
     "id": 4,

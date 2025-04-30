@@ -49,3 +49,33 @@
   width: 100%;
   aspect-ratio: 16 / 9;
 }
+
+#question_title {
+  font-size: 25px; 
+  font-weight: bold;
+}
+
+#question_content {
+  font-size: 1.2rem;
+  line-height: 1.8;
+}
+
+@media (max-width: 768px) {
+  #question_content {
+    font-size: 1rem !important;
+    line-height: 1.8 !important;
+    max-width: 90vw;
+    word-break: break-word;
+    white-space: normal;
+  }
+}
+
+#choice {
+  margin-left: 0.1rem;
+  font-size: 18px;
+  padding:2px 0;
+}
+
+#quizForm {
+  padding-top: 10px;
+}
