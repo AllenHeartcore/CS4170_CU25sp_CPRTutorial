@@ -77,7 +77,12 @@
     height: 15rem;
 }
 
-#p5Canvas canvas {
+#p5MeterCanvas {
+    height: 60px;
+    margin: 0 auto;
+}
+
+#p5ButtonCanvas canvas {
     position: absolute;
     top: 0;
     left: 0;

@@ -11,13 +11,30 @@ const RESET_THRES_TIMEIN = 250; // strange naming, bruh
 
 const QUEUE_SIZE = 16; // larger = smoother; taken from FL Studio
 
-/* ------------------------------ Constants for p5.js animation */
+/* ------------------------------ Constants for p5.js layout */
+
+// M stands for Meter
+// (have to keep this short; otherwise Prettier break lines)
+const M_CANVAS_W = 360;
+const M_CANVAS_H = 60;
+const M_VALID_MIN = 100;
+const M_VALID_MAX = 120;
+const M_SCALE_PAD = 40;
+const M_FULL_PAD = 10;
+const M_TICK_SEP = 20;
+const M_SCALE_MIN = M_VALID_MIN - M_SCALE_PAD;
+const M_SCALE_MAX = M_VALID_MAX + M_SCALE_PAD;
+const M_FULL_MIN = M_SCALE_MIN - M_FULL_PAD;
+const M_FULL_MAX = M_SCALE_MAX + M_FULL_PAD;
 
 const DARK_RED = "hsl(0, 100%, 30%)";
 const BRIGHT_RED = "hsl(0, 100%, 65%)";
+const BRIGHT_YELLOW = "hsl(60, 90%, 65%)";
 const DARK_GREEN = "hsl(120, 80%, 25%)";
 const BRIGHT_GREEN = "hsl(120, 80%, 50%)";
 const DARK_BLUE = "hsl(240, 70%, 35%)";
+const BRIGHT_GRAY = "hsl(0, 0%, 90%)";
+const BLACK = "hsl(0, 0%, 0%)";
 
 // 240*240px ≈ 15rem @16px
 const CANVAS_SIZE = 16 * 15;
@@ -25,9 +42,10 @@ const TIMER_SIZE_INNER = 15.2 * 15; // outer = canvas size
 const BUTTON_SIZE_IDLE = 12.8 * 15;
 const BUTTON_SIZE_ACTIVE = 14.4 * 15;
 
-const TIMER_DUR = 20000; // 120 BPM * 30 times, +33% buffer
+const TIMER_DUR = 18000; // 100 BPM * 30 times
 const ANIM_DUR_PIE = 100; // ms
 const ANIM_DUR_BOUNCE = 100;
+const ANIM_DUR_NEEDLE = 150;
 
 /* ------------------------------ Bookkeeping variables */
 
@@ -37,11 +55,11 @@ let firstTap = null;
 let lastBPM = null;
 let fillAngle = 0;
 
-/* ------------------------------ p5.js functions */
+/* ------------------------------ p5.js button */
 
 function setup() {
     const canvas = createCanvas(CANVAS_SIZE, CANVAS_SIZE);
-    canvas.parent("p5Canvas");
+    canvas.parent("p5ButtonCanvas");
     angleMode(DEGREES);
     noStroke();
 }
@@ -110,6 +128,59 @@ function draw() {
     pop();
 }
 
+/* ------------------------------ p5.js meter */
+
+const meter = new p5((p) => {
+    p.targetNeedle = 0; // desired BPM
+    p.displayedNeedle = 0; // smoothed needle
+
+    p.setup = () => {
+        const c = p.createCanvas(M_CANVAS_W, M_CANVAS_H);
+        c.parent("p5MeterCanvas");
+        p.textSize(12);
+        p.textAlign(p.CENTER, p.TOP);
+    };
+
+    p.draw = () => {
+        p.clear();
+
+        p.noStroke();
+        p.fill(BRIGHT_GRAY);
+        p.rect(0, 0, p.width, p.height); // full range
+
+        const sMinX = p.map(M_SCALE_MIN, M_FULL_MIN, M_FULL_MAX, 0, p.width);
+        const sMaxX = p.map(M_SCALE_MAX, M_FULL_MIN, M_FULL_MAX, 0, p.width);
+        p.fill(BRIGHT_YELLOW);
+        p.rect(sMinX, 0, sMaxX - sMinX, p.height); // scale range
+
+        const vMinX = p.map(M_VALID_MIN, M_FULL_MIN, M_FULL_MAX, 0, p.width);
+        const vMaxX = p.map(M_VALID_MAX, M_FULL_MIN, M_FULL_MAX, 0, p.width);
+        p.fill(BRIGHT_GREEN);
+        p.rect(vMinX, 0, vMaxX - vMinX, p.height); // valid range
+
+        p.stroke(BLACK);
+        p.fill(BLACK);
+        for (let v = M_SCALE_MIN; v <= M_SCALE_MAX; v += M_TICK_SEP) {
+            const x = p.map(v, M_FULL_MIN, M_FULL_MAX, 0, p.width);
+            p.line(x, p.height * 0.8, x, p.height); // ticks
+            p.text(v, x, p.height * 0.55);
+        }
+
+        p.displayedNeedle = p.lerp(
+            p.displayedNeedle, // a similar smooth algorithm
+            p.targetNeedle,
+            Math.min(1, p.deltaTime / ANIM_DUR_NEEDLE)
+        );
+
+        p.push(); // strokeWeight is sticky
+        const nx = p.map(p.displayedNeedle, M_FULL_MIN, M_FULL_MAX, 0, p.width);
+        p.stroke(BRIGHT_RED);
+        p.strokeWeight(3);
+        p.line(nx, 0, nx, p.height); // needle
+        p.pop();
+    };
+});
+
 /* ------------------------------ BPM functions */
 
 function resetBPMAlgorithm() {
@@ -125,6 +196,7 @@ function resetBPMAlgorithm() {
 }
 
 function updateBPMDisplay(BPM) {
+    meter.targetNeedle = BPM;
     sBPM = BPM.toFixed(2).split("."); // avoid confusion with multiple conversions
     $("#bpmDisplayMajor").text(sBPM[0]);
     $("#bpmDisplayMinor").text("." + sBPM[1]);
