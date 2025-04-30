@@ -195,7 +195,7 @@ function resetBPMAlgorithm() {
     lastBPM = null;
 }
 
-function updateBPMDisplay(BPM) {
+function updateBPMDisplay(BPM, reset) {
     meter.targetNeedle = BPM;
     sBPM = BPM.toFixed(2).split("."); // avoid confusion with multiple conversions
     $("#bpmDisplayMajor").text(sBPM[0]);
@@ -203,18 +203,34 @@ function updateBPMDisplay(BPM) {
     $("#tapsDisplay").text(ntaps.toString());
 
     if (ntaps < QUEUE_SIZE) {
-        $("#rhythmDigest").text("Keep going...");
-        $("#rhythmDigest").addClass("text-yellow");
+        if (reset) {
+            $("#rhythmDigest").text("Algorithm reset");
+            $("#rhythmDigest").removeClass("text-yellow text-green");
+            $("#rhythmDigest").addClass("text-red");
+        } else {
+            $("#rhythmDigest").text("Keep going...");
+            $("#rhythmDigest").removeClass("text-red text-green");
+            $("#rhythmDigest").addClass("text-yellow");
+        }
+        $("#bpmDisplayMajor").removeClass("text-red text-yellow text-green");
+        $("#bpmDisplayMinor").removeClass("text-red text-yellow text-green");
     } else {
         $("#rhythmDigest").text("Stabilized!");
+        $("#rhythmDigest").removeClass("text-red text-yellow");
         $("#rhythmDigest").addClass("text-green");
         if (BPM > M_VALID_MIN && BPM < M_VALID_MAX) {
+            $("#bpmDisplayMajor").removeClass("text-red text-yellow");
+            $("#bpmDisplayMinor").removeClass("text-red text-yellow");
             $("#bpmDisplayMajor").addClass("text-green");
             $("#bpmDisplayMinor").addClass("text-green");
         } else if (BPM > M_FULL_MIN && BPM < M_FULL_MAX) {
+            $("#bpmDisplayMajor").removeClass("text-red text-green");
+            $("#bpmDisplayMinor").removeClass("text-red text-green");
             $("#bpmDisplayMajor").addClass("text-yellow");
             $("#bpmDisplayMinor").addClass("text-yellow");
         } else {
+            $("#bpmDisplayMajor").removeClass("text-yellow text-green");
+            $("#bpmDisplayMinor").removeClass("text-yellow text-green");
             $("#bpmDisplayMajor").addClass("text-red");
             $("#bpmDisplayMinor").addClass("text-red");
         }
@@ -229,6 +245,7 @@ function updateBPM() {
 
     let validTaps = taps.filter((time) => time !== null);
     let BPM = 0;
+    let reset = false; // for updateBPMDisplay to tell apart initial and consequent 0 BPM
 
     if (validTaps.length > 1) {
         BPM =
@@ -243,6 +260,7 @@ function updateBPM() {
             now - validTaps[validTaps.length - 2] < RESET_THRES_TIMEIN
         ) {
             BPM = 0;
+            reset = true;
             resetBPMAlgorithm();
         }
     } else {
@@ -252,7 +270,7 @@ function updateBPM() {
         // and the "overall average" feedback depend on it
     }
 
-    updateBPMDisplay(BPM);
+    updateBPMDisplay(BPM, reset);
 }
 
 /* ------------------------------ Main */
