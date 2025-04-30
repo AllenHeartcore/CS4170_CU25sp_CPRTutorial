@@ -35,13 +35,33 @@
             <button class="btn-sleek mt-5 w-75" id="home2Steps">
                 Learn the Steps
             </button>
-            <button class="btn-sleek mt-5 w-75" id="home2Rhythm"
-                {% if not flag_steps_completed %} disabled {% endif %}
+            <button
+                class="btn-sleek mt-5 w-75"
+                id="home2Rhythm"
+                {%
+                if
+                not
+                flag_steps_completed
+                %}
+                disabled
+                {%
+                endif
+                %}
             >
                 Rhythm Training
             </button>
-            <button class="btn-sleek mt-5 w-75" id="home2Quiz"
-                {% if not flag_steps_completed %} disabled {% endif %}
+            <button
+                class="btn-sleek mt-5 w-75"
+                id="home2Quiz"
+                {%
+                if
+                not
+                flag_steps_completed
+                %}
+                disabled
+                {%
+                endif
+                %}
             >
                 Test Your Knowledge
             </button>

@@ -1,68 +1,71 @@
-{% extends "layout.html" %}
-{% block content %}
+{% extends "layout.html" %} {% block content %}
 
-<script 
-    type="text/javascript" 
-    src="{{ url_for('static', filename='js/quiz.js') }}">
-</script>
+<script
+    type="text/javascript"
+    src="{{ url_for('static', filename='js/quiz.js') }}"
+></script>
 
 <script>
-  // expose quiz metadata to quiz.js
-  let qid   = {{ qid }};
-  let total = {{ total }};
-  let qType = "{{ q_type }}";
+    // expose quiz metadata to quiz.js
+    let qid   = {{ qid }};
+    let total = {{ total }};
+    let qType = "{{ q_type }}";
 </script>
 
-<div id="pageElements" class="container d-flex flex-column" style="min-height: calc(100vh - 4rem);">
-  <!-- question header -->
-  <div class="row">
-    <div class="col-12 title text-center">Question {{ qid }} of {{ total }}</div>
-    <div class="col-12 subtitle text-center mt-2">{{ question }}</div>
-  </div>
-
-  <!-- answer form -->
-  <form
-    id="quizForm"
-    method="post"
-    action="{{ url_for('quiz', qid=qid) }}"
-    class="row flex-grow-1 mt-4 d-flex flex-column justify-content-center align-items-center gap-4"
-    novalidate
-  >
-    {% if q_type in ['single','multi'] %}
-      {% for choice in choices %}
-        <label class="form-check shadow-at-hover p-3 rounded w-100">
-          <input
-            class="form-check-input me-2"
-            type="{{ 'radio' if q_type=='single' else 'checkbox' }}"
-            name="answer"
-            value="{{ loop.index }}"
-          />
-          {{ choice }}
-        </label>
-      {% endfor %}
-    {% else %}
-      <input
-        type="text"
-        name="answer_text"
-        class="form-control shadow-at-hover p-3 w-100"
-        placeholder="Type your answer…"
-      />
-    {% endif %}
-
-    <!-- navigation buttons -->
-    <div class="row w-100 mt-5">
-      <div class="col-6 d-flex justify-content-start">
-        <button type="button" class="btn-sleek" id="quizPrev">
-          <i class="bi bi-arrow-left"></i>
-        </button>
-      </div>
-      <div class="col-6 d-flex justify-content-end">
-        <button type="button" class="btn-sleek" id="quizNext">
-          <i class="bi bi-arrow-right"></i>
-        </button>
-      </div>
+<div
+    id="pageElements"
+    class="container d-flex flex-column"
+    style="min-height: calc(100vh - 4rem)"
+>
+    <!-- question header -->
+    <div class="row">
+        <div class="col-12 title text-center">
+            Question {{ qid }} of {{ total }}
+        </div>
+        <div class="col-12 subtitle text-center mt-2">{{ question }}</div>
     </div>
-  </form>
+
+    <!-- answer form -->
+    <form
+        id="quizForm"
+        method="post"
+        action="{{ url_for('quiz', qid=qid) }}"
+        class="row flex-grow-1 mt-4 d-flex flex-column justify-content-center align-items-center gap-4"
+        novalidate
+    >
+        {% if q_type in ['single','multi'] %} {% for choice in choices %}
+        <label class="form-check shadow-at-hover p-3 rounded w-100">
+            <input
+                class="form-check-input me-2"
+                type="{{ 'radio' if q_type=='single' else 'checkbox' }}"
+                name="answer"
+                value="{{ loop.index }}"
+            />
+            {{ choice }}
+        </label>
+        {% endfor %} {% else %}
+        <input
+            type="text"
+            name="answer_text"
+            class="form-control shadow-at-hover p-3 w-100"
+            placeholder="Type your answer…"
+        />
+        {% endif %}
+
+        <!-- navigation buttons -->
+        <div class="row w-100 mt-5">
+            <div class="col-6 d-flex justify-content-start">
+                <button type="button" class="btn-sleek" id="quizPrev">
+                    <i class="bi bi-arrow-left"></i>
+                </button>
+            </div>
+            <div class="col-6 d-flex justify-content-end">
+                <button type="button" class="btn-sleek" id="quizNext">
+                    <i class="bi bi-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </form>
 </div>
 
 {% endblock %}
