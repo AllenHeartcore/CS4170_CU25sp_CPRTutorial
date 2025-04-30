@@ -18,20 +18,32 @@
         </div>
     </div>
 
-    <div class="row mt-5 text-bold gx-0 lh-sm">
-        <div class="col-4">
-            <div class="bpmstat-key">Taps</div>
-            <div id="tapsDisplay" class="bpmstat-value">0</div>
+    <div class="row mt-5 gx-0 bpmstat-key">
+        <div class="col-3">
+            <div class="">Taps</div>
         </div>
         <div class="col-6">
             <div class="bpmstat-key">BPM</div>
-            <div id="bpmDisplay" class="bpmstat-value">0.00</div>
         </div>
-        <div class="col-2">
+        <div class="col-3">
             <div class="bpmstat-key">Time</div>
-            <div id="timeDisplay" class="bpmstat-value">0</div>
         </div>
     </div>
+
+    <div class="row gx-0 bpmstat-value">
+        <div class="col-3">
+            <div id="tapsDisplay">0</div>
+        </div>
+        <div class="col-6">
+            <span id="bpmDisplayMajor" class="mx-0">0</span
+            ><span id="bpmDisplayMinor" class="mx-0 bpmstat-value-s">.00</span>
+        </div>
+        <div class="col-3">
+            <span id="timeDisplayMajor" class="mx-0">0</span
+            ><span id="timeDisplayMinor" class="mx-0 bpmstat-value-s">.0</span>
+        </div>
+    </div>
+
     <div class="row mt-5">
         <div class="col-12 text-center">
             <div id="tapContainer">

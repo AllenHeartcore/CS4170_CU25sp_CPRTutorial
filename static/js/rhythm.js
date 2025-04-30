@@ -93,11 +93,13 @@ function draw() {
     /* timer */
     let R = CANVAS_SIZE / 2;
     let r = TIMER_SIZE_INNER / 2;
-    let timeLeft = TIMER_DUR - (now - firstTap);
-    let timerAngle = (timeLeft / TIMER_DUR) * 360;
-    $("#timeDisplay").text((timeLeft / 1000).toFixed(1));
+    let timeLeft = Math.max(0, TIMER_DUR - (now - firstTap));
+    let sTimeLeft = (timeLeft / 1000).toFixed(1).split(".");
+    $("#timeDisplayMajor").text(sTimeLeft[0]);
+    $("#timeDisplayMinor").text("." + sTimeLeft[1]);
 
     /* draw timer stroke */
+    let timerAngle = (timeLeft / TIMER_DUR) * 360;
     push();
     // strokes are sticky, so instead of scattering noStroke()
     // all over the place, we put this special case in "brackets"
@@ -123,7 +125,9 @@ function resetBPMAlgorithm() {
 }
 
 function updateBPMDisplay(BPM) {
-    $("#bpmDisplay").text(BPM.toFixed(2));
+    sBPM = BPM.toFixed(2).split("."); // avoid confusion with multiple conversions
+    $("#bpmDisplayMajor").text(sBPM[0]);
+    $("#bpmDisplayMinor").text("." + sBPM[1]);
     $("#tapsDisplay").text(ntaps.toString());
 }
 
