@@ -50,6 +50,63 @@
   aspect-ratio: 16 / 9;
 }
 
+/* Rhythm */
+
+.bpmstat-key {
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.bpmstat-value-s {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.bpmstat-value {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+#tapContainer {
+  position: relative;
+  display: inline-block;
+  width: 15rem;
+  height: 15rem;
+}
+
+#p5MeterCanvas {
+  height: 60px;
+  margin: 0 auto;
+}
+
+#p5ButtonCanvas canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#tapButton {
+  /* overlay on top of canvas */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  border: none;
+  background: transparent; /* pie shape handled by p5.js */
+  color: white;
+
+  font-size: 3em;
+  font-weight: 600;
+
+  cursor: pointer;
+  outline: none;
+}
+
 #question_title {
   font-size: 25px; 
   font-weight: bold;

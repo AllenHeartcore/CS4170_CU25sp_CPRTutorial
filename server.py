@@ -76,6 +76,10 @@ def steps(id):
     )
 
 
+@app.route("/rhythm")
+def rhythm():
+    return render_template("rhythm.html")
+
 
 @app.route("/quiz/<int:qid>", methods=["GET", "POST"])
 def quiz(qid):
