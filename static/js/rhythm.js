@@ -202,35 +202,28 @@ function updateBPMDisplay(BPM, reset) {
     $("#bpmDisplayMinor").text("." + sBPM[1]);
     $("#tapsDisplay").text(ntaps.toString());
 
+    $("#rhythmStatus").removeClass("text-red text-yellow text-green");
+    $("#bpmDisplayMajor").removeClass("text-red text-yellow text-green");
+    $("#bpmDisplayMinor").removeClass("text-red text-yellow text-green");
+
     if (ntaps < QUEUE_SIZE) {
         if (reset) {
-            $("#rhythmDigest").text("Algorithm reset");
-            $("#rhythmDigest").removeClass("text-yellow text-green");
-            $("#rhythmDigest").addClass("text-red");
+            $("#rhythmStatus").text("Algorithm reset");
+            $("#rhythmStatus").addClass("text-red");
         } else {
-            $("#rhythmDigest").text("Keep going...");
-            $("#rhythmDigest").removeClass("text-red text-green");
-            $("#rhythmDigest").addClass("text-yellow");
+            $("#rhythmStatus").text("Keep going...");
+            $("#rhythmStatus").addClass("text-yellow");
         }
-        $("#bpmDisplayMajor").removeClass("text-red text-yellow text-green");
-        $("#bpmDisplayMinor").removeClass("text-red text-yellow text-green");
     } else {
-        $("#rhythmDigest").text("Stabilized!");
-        $("#rhythmDigest").removeClass("text-red text-yellow");
-        $("#rhythmDigest").addClass("text-green");
+        $("#rhythmStatus").text("Stabilized!");
+        $("#rhythmStatus").addClass("text-green");
         if (BPM > M_VALID_MIN && BPM < M_VALID_MAX) {
-            $("#bpmDisplayMajor").removeClass("text-red text-yellow");
-            $("#bpmDisplayMinor").removeClass("text-red text-yellow");
             $("#bpmDisplayMajor").addClass("text-green");
             $("#bpmDisplayMinor").addClass("text-green");
         } else if (BPM > M_FULL_MIN && BPM < M_FULL_MAX) {
-            $("#bpmDisplayMajor").removeClass("text-red text-green");
-            $("#bpmDisplayMinor").removeClass("text-red text-green");
             $("#bpmDisplayMajor").addClass("text-yellow");
             $("#bpmDisplayMinor").addClass("text-yellow");
         } else {
-            $("#bpmDisplayMajor").removeClass("text-yellow text-green");
-            $("#bpmDisplayMinor").removeClass("text-yellow text-green");
             $("#bpmDisplayMajor").addClass("text-red");
             $("#bpmDisplayMinor").addClass("text-red");
         }
