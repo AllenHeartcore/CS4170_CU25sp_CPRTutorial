@@ -27,7 +27,7 @@
       "One hand on the forehead and the other under the chin",
       "Keep the victim's mouth completely closed"
     ],
-    "answer": 
+    "answer": [0, 2]
   },
   "4": {
     "id": 4,
@@ -38,7 +38,8 @@
       "Listen for breathing sounds",
       "Feel for breath on the cheek",
       "Tap the victim's shoulders"
-    ]
+    ],
+    "answer": [0, 1, 2]
   },
   "5": {
     "id": 5,
@@ -49,7 +50,8 @@
       "Arms kept straight",
       "Push down slowly and gently",
       "Compress hard and fast"
-    ]
+    ],
+    "answer": [1, 3]
   },
   "6": {
     "id": 6,
@@ -60,11 +62,13 @@
       "Seal your mouth over theirs",
       "Blow for at least 3 seconds",
       "Release the nose during exhalation"
-    ]
+    ],
+    "answer": [0, 1]
   },
   "7": {
     "id": 7,
     "question": "Don't Give Up!  Continue cycles of __ compressions and __ breaths.",
-    "type": "fill"
+    "type": "fill",
+    "answer": "30 compressions and 2 breaths"
   }
 }
