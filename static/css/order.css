@@ -1,0 +1,63 @@
+/* order.css — For drag-and-drop sorting*/
+
+/* Disable default touch scrolling */
+#choices,
+.drop-box,
+.draggable {
+    touch-action: none;
+}
+
+/* Draggable image */
+.draggable {
+    width: 80px;
+    height: 80px;
+    margin: 0.5rem;
+    cursor: grab;
+    transition: opacity 0.2s;
+}
+.draggable:active {
+    cursor: grabbing;
+}
+
+/* Drop box */
+.drop-box {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    border: 2px dashed #6c757d;
+    border-radius: 0.25rem;
+    margin: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+.drop-box.highlight {
+    border-color: #0d6efd;
+    background-color: rgba(13, 110, 253, 0.1);
+}
+
+/* Order number */
+.drop-box .order-number {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    color: #6c757d;
+    font-weight: 600;
+}
+
+/* Responsive: shrink size on mobile */
+@media (max-width: 576px) {
+    .draggable {
+        width: 4rem;
+        height: 4rem;
+        margin: 0.25rem;
+    }
+    .drop-box {
+        width: 4.5rem;
+        height: 4.5rem;
+        margin: 0.25rem;
+    }
+}

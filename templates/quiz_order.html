@@ -1,0 +1,76 @@
+{% extends "layout.html" %} {% block content %}
+<script
+    type="text/javascript"
+    src="{{ url_for('static', filename='js/quiz_order.js') }}"
+></script>
+
+<script>
+    // expose quiz metadata to quiz_order.js
+    let qid   = {{ qid }};
+    let total = {{ total }};
+</script>
+
+<div
+    id="pageElements"
+    class="container d-flex flex-column pt-4"
+    style="min-height: calc(100vh - 4rem)"
+>
+    <!-- question header -->
+    <div class="row">
+        <div class="col-12 title text-center">
+            Question {{ qid }} of {{ total }}
+        </div>
+        <div class="col-12 subtitle text-center mt-2">
+            Please arrange the images in the correct CPR steps order
+        </div>
+    </div>
+
+    <!-- drag-and-drop area -->
+    <form
+        id="orderForm"
+        method="post"
+        action="{{ url_for('quiz', qid=qid) }}"
+        class="row flex-grow-1 mt-4 d-flex flex-column justify-content-center align-items-center gap-4"
+        novalidate
+    >
+        <!-- draggable images -->
+        <div
+            id="choices"
+            class="d-flex flex-wrap justify-content-center w-100 gap-3"
+        >
+            {% for img in images %}
+            <img
+                src="{{ img.url }}"
+                id="choice-{{ img.num }}"
+                class="draggable img-fluid"
+                draggable="true"
+                alt="Step {{ img.num }}"
+            />
+            {% endfor %}
+        </div>
+
+        <!-- drop targets -->
+        <div class="d-flex flex-wrap justify-content-center w-100 gap-3">
+            {% for i in range(1, 7) %}
+            <div class="drop-box" data-index="{{ i }}">
+                <span class="order-number">{{ i }}</span>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- navigation buttons -->
+        <div class="row w-100 mt-5">
+            <div class="col-6 d-flex justify-content-start">
+                <button type="button" class="btn-sleek" id="quizPrev">
+                    <i class="bi bi-arrow-left"></i>
+                </button>
+            </div>
+            <div class="col-6 d-flex justify-content-end">
+                <button type="button" class="btn-sleek" id="quizNext">
+                    <i class="bi bi-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

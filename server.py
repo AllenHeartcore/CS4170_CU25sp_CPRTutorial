@@ -1,3 +1,4 @@
+import random
 from flask import (
     Flask, render_template,
     request, redirect, url_for,
@@ -78,15 +79,38 @@ def steps(id):
 
 @app.route("/quiz/<int:qid>", methods=["GET", "POST"])
 def quiz(qid):
-    total = len(cpr_quizzes)
+    base_total = len(cpr_quizzes)
+    total = base_total + 1
 
     if not (1 <= qid <= total):
         return redirect(url_for("quiz", qid=1))
 
-    quiz_obj = cpr_quizzes[qid - 1]
+    # order
+    if qid == total:
+        #random 1–6
+        steps = list(range(1, 7))
+        random.shuffle(steps)
+        images = [
+            {"num": num, "url": url_for("static", filename=f"img/step{num}.svg")}
+            for num in steps
+        ]
+        if request.method == "POST":
+            order = request.form.getlist("order")
+            # TODO: grade
+            return redirect(url_for("home"))
+        return render_template(
+            "quiz_order.html",
+            qid=qid,
+            total=total,
+            images=images,
+        )
 
+    #normal quiz
+    quiz_obj = cpr_quizzes[qid - 1]
     if request.method == "POST":
-        # TODO: grade answers in request.form
+        # TODO: grade
+        if qid < total:
+            return redirect(url_for("quiz", qid=qid + 1))
         return redirect(url_for("home"))
 
     return render_template(
@@ -98,6 +122,7 @@ def quiz(qid):
         choices=quiz_obj.get("choices", []),
         answer=quiz_obj["answer"],
     )
+
 
 
 if __name__ == "__main__":
