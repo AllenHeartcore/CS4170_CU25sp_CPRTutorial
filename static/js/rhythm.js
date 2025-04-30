@@ -201,6 +201,24 @@ function updateBPMDisplay(BPM) {
     $("#bpmDisplayMajor").text(sBPM[0]);
     $("#bpmDisplayMinor").text("." + sBPM[1]);
     $("#tapsDisplay").text(ntaps.toString());
+
+    if (ntaps < QUEUE_SIZE) {
+        $("#rhythmDigest").text("Keep going...");
+        $("#rhythmDigest").addClass("text-yellow");
+    } else {
+        $("#rhythmDigest").text("Stabilized!");
+        $("#rhythmDigest").addClass("text-green");
+        if (BPM > M_VALID_MIN && BPM < M_VALID_MAX) {
+            $("#bpmDisplayMajor").addClass("text-green");
+            $("#bpmDisplayMinor").addClass("text-green");
+        } else if (BPM > M_FULL_MIN && BPM < M_FULL_MAX) {
+            $("#bpmDisplayMajor").addClass("text-yellow");
+            $("#bpmDisplayMinor").addClass("text-yellow");
+        } else {
+            $("#bpmDisplayMajor").addClass("text-red");
+            $("#bpmDisplayMinor").addClass("text-red");
+        }
+    }
 }
 
 function updateBPM() {

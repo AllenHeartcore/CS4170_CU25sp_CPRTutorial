@@ -82,11 +82,15 @@ ul.increase-linesep li {
 }
 
 .text-red {
-    color: red;
+    color: hsl(0, 100%, 50%);
+}
+
+.text-yellow {
+    color: hsl(60, 100%, 35%);
 }
 
 .text-green {
-    color: green;
+    color: hsl(120, 80%, 25%);
 }
 
 .text-gray {
