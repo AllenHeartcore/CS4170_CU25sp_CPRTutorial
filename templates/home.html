@@ -1,52 +1,72 @@
 {% extends "layout.html" %} {% block content %}
 
 <script
-    type="text/javascript"
-    src="{{ url_for('static', filename='js/home.js') }}"
+  type="text/javascript"
+  src="{{ url_for('static', filename='js/home.js') }}"
 ></script>
 
 <!-- AJAX Interface -->
 <script>
-    let flag_steps_completed = {{ flag_steps_completed | tojson }};
+  let flag_steps_completed = {{ flag_steps_completed | tojson }};
 </script>
 
 <div id="pageElements" class="container">
-    <div class="row">
-        <div class="col-md-12 text-tightline">
-            What would you do if <br />
-            a loved one
-            <span class="text-bold text-red"> collapsed </span> <br />
-            on Thanksgiving? <br />
-            A birthday party? <br />
-            A big game?
-        </div>
+  <div class="row">
+    <div class="col-md-12 text-tightline">
+      What would you do if <br />
+      a loved one
+      <span class="text-bold text-red"> collapsed </span> <br />
+      on Thanksgiving? <br />
+      A birthday party? <br />
+      A big game?
     </div>
+  </div>
 
-    <div class="row mt-5">
-        <div class="col-md-12 title">
-            Be prepared. <br />
-            Learn to help <br />
-            with CPR.
-        </div>
+  <div class="row mt-5">
+    <div class="col-md-12 title">
+      Be prepared. <br />
+      Learn to help <br />
+      with CPR.
     </div>
+  </div>
 
-    <div class="row mt-3">
-        <div class="col-md-12 fs-4 btn-navlist">
-            <button class="btn-sleek mt-5 w-75" id="home2Steps">
-                Learn the Steps
-            </button>
-            <button class="btn-sleek mt-5 w-75" id="home2Rhythm"
-                {% if not flag_steps_completed %} disabled {% endif %}
-            >
-                Rhythm Training
-            </button>
-            <button class="btn-sleek mt-5 w-75" id="home2Quiz"
-                {% if not flag_steps_completed %} disabled {% endif %}
-            >
-                Test Your Knowledge
-            </button>
-        </div>
+  <div class="row mt-3">
+    <div class="col-md-12 fs-4 btn-navlist">
+      <button class="btn-sleek mt-5 w-75" id="home2Steps">
+        Learn the Steps
+      </button>
+      <button
+        class="btn-sleek mt-5 w-75"
+        id="home2Rhythm"
+        {%
+        if
+        not
+        flag_steps_completed
+        %}
+        disabled
+        {%
+        endif
+        %}
+      >
+        Rhythm Training
+      </button>
+      <button
+        class="btn-sleek mt-5 w-75"
+        id="home2Quiz"
+        {%
+        if
+        not
+        flag_steps_completed
+        %}
+        disabled
+        {%
+        endif
+        %}
+      >
+        Test Your Knowledge
+      </button>
     </div>
+  </div>
 </div>
 
 {% endblock %}

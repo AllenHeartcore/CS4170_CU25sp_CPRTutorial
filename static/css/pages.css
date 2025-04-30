@@ -1,51 +1,51 @@
 #pageElements {
-    margin-top: 7.5rem;
+  margin-top: 7.5rem;
 }
 
 .title {
-    font-size: 3rem;
-    font-weight: 700;
-    line-height: 1;
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1;
 }
 
 .subtitle {
-    font-size: 2rem;
-    font-weight: 600;
-    line-height: 1;
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1;
 }
 
 /* Navbar */
 
 .navbar {
-    background-color: hsl(0, 80%, 90%);
+  background-color: hsl(0, 80%, 90%);
 }
 
 #navbarNav {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 #navbarSticker {
-    height: 60px;
-    width: 60px;
+  height: 60px;
+  width: 60px;
 }
 
 .bi-github:hover {
-    color: black !important;
-    transition: color 0.3s;
+  color: black !important;
+  transition: color 0.3s;
 }
 
 /* Home */
 
 .btn-navlist * {
-    text-align: left;
-    font-weight: 600;
+  text-align: left;
+  font-weight: 600;
 }
 
 /* Steps */
 
 #embeddedYoutubeVideo {
-    width: 100%;
-    aspect-ratio: 16 / 9;
+  width: 100%;
+  aspect-ratio: 16 / 9;
 }

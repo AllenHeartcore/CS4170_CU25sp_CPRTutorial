@@ -4,109 +4,109 @@
 
 html,
 body {
-    height: 100%;
-    margin: 0;
+  height: 100%;
+  margin: 0;
 }
 
 body {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .container {
-    flex: 1;
-    padding: 0 5%;
-    width: 100%;
-    font-family: "MoMA Sans", sans-serif;
-    font-size: 24px;
-    font-weight: 400;
+  flex: 1;
+  padding: 0 5%;
+  width: 100%;
+  font-family: "MoMA Sans", sans-serif;
+  font-size: 24px;
+  font-weight: 400;
 }
 
 /* General layout */
 
 .full-width {
-    width: 100%;
+  width: 100%;
 }
 
 .align-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 0 auto;
 }
 
 .align-right {
-    text-align: right;
-    float: right;
+  text-align: right;
+  float: right;
 }
 
 .hide-by-default {
-    display: none;
+  display: none;
 }
 
 .vertically-scrollable {
-    overflow-y: auto;
-    max-height: 100%;
-    width: 100% !important;
+  overflow-y: auto;
+  max-height: 100%;
+  width: 100% !important;
 }
 
 ul.increase-linesep li {
-    margin-bottom: 0.75rem;
+  margin-bottom: 0.75rem;
 }
 
 /* General text */
 
 .text-size-150 * {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
 }
 
 .text-bold {
-    font-weight: 700;
+  font-weight: 700;
 }
 
 .text-italic {
-    font-style: italic;
+  font-style: italic;
 }
 
 .text-tightline {
-    line-height: 1.2;
+  line-height: 1.2;
 }
 
 .text-monospace {
-    font-family: Consolas, monospace;
+  font-family: Consolas, monospace;
 }
 
 .text-red {
-    color: red;
+  color: red;
 }
 
 .text-green {
-    color: green;
+  color: green;
 }
 
 .text-gray {
-    color: gray;
+  color: gray;
 }
 
 /* General multimedia */
 
 .image-landscape {
-    aspect-ratio: 16 / 9;
-    overflow: hidden;
-    width: 100%;
-    height: auto;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  width: 100%;
+  height: auto;
 }
 
 .image-roundedge {
-    border-radius: 0.5rem;
+  border-radius: 0.5rem;
 }
 
 .anchor-no-decoration {
-    text-decoration: none;
-    color: inherit;
+  text-decoration: none;
+  color: inherit;
 }
 .anchor-no-decoration:hover {
-    text-decoration: none;
-    color: inherit;
+  text-decoration: none;
+  color: inherit;
 }

@@ -1,89 +1,89 @@
 /* Buttons */
 
 .btn-sleek {
-    --offset: 0.5rem;
-    --accent-color: #000;
+  --offset: 0.5rem;
+  --accent-color: #000;
 
-    position: relative;
-    display: inline-block;
-    padding: 0.5em 0.5em;
+  position: relative;
+  display: inline-block;
+  padding: 0.5em 0.5em;
 
-    color: var(--accent-color);
-    background: #fff;
-    cursor: pointer;
-    border: none;
-    opacity: 1;
+  color: var(--accent-color);
+  background: #fff;
+  cursor: pointer;
+  border: none;
+  opacity: 1;
 }
 
 .btn-sleek::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: calc(100% + var(--offset));
-    height: calc(100% + var(--offset));
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100% + var(--offset));
+  height: calc(100% + var(--offset));
 
-    background: var(--accent-color);
-    clip-path: polygon(
-        0 0,
-        0 calc(100% - var(--offset)),
-        calc(var(--offset)) 100%,
-        100% 100%,
-        100% calc(var(--offset)),
-        calc(100% - var(--offset)) 0
-    );
+  background: var(--accent-color);
+  clip-path: polygon(
+    0 0,
+    0 calc(100% - var(--offset)),
+    calc(var(--offset)) 100%,
+    100% 100%,
+    100% calc(var(--offset)),
+    calc(100% - var(--offset)) 0
+  );
 
-    transition: all 0.2s ease-out;
-    z-index: -1;
+  transition: all 0.2s ease-out;
+  z-index: -1;
 }
 
 .btn-sleek:hover {
-    --offset: 1.5rem;
+  --offset: 1.5rem;
 }
 
 .btn-sleek:disabled {
-    --accent-color: lightgray;
-    cursor: not-allowed;
-    pointer-events: none;
+  --accent-color: lightgray;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 /* Shadows */
 
 .shadow-at-hover {
-    transition: box-shadow 0.2s;
+  transition: box-shadow 0.2s;
 }
 .shadow-at-hover:hover {
-    box-shadow: 0.5rem 0.5rem 0.25rem rgba(0, 0, 0, 0.15);
+  box-shadow: 0.5rem 0.5rem 0.25rem rgba(0, 0, 0, 0.15);
 }
 
 /* Smooth fade-in/out animation */
 
 @keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateY(-0.5rem);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(-0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes slideOut {
-    from {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    to {
-        opacity: 0;
-        transform: translateY(-0.5rem);
-    }
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-0.5rem);
+  }
 }
 
 .slide-in {
-    animation: slideIn 0.2s ease-out forwards;
+  animation: slideIn 0.2s ease-out forwards;
 }
 
 .slide-out {
-    animation: slideOut 0.2s ease-in forwards;
+  animation: slideOut 0.2s ease-in forwards;
 }

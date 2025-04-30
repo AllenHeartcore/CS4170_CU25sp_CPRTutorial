@@ -1,27 +1,27 @@
 @font-face {
-    font-family: "MoMA Sans";
-    src: url("https://www.moma.org/dist/node_modules/sol/dist/moma-sans/moma-sans__regular.woff2")
-        format("woff2");
-    font-weight: 400;
+  font-family: "MoMA Sans";
+  src: url("https://www.moma.org/dist/node_modules/sol/dist/moma-sans/moma-sans__regular.woff2")
+    format("woff2");
+  font-weight: 400;
 }
 
 @font-face {
-    font-family: "MoMA Sans";
-    src: url("https://www.moma.org/dist/node_modules/sol/dist/moma-sans/moma-sans__medium.woff2")
-        format("woff2");
-    font-weight: 500;
+  font-family: "MoMA Sans";
+  src: url("https://www.moma.org/dist/node_modules/sol/dist/moma-sans/moma-sans__medium.woff2")
+    format("woff2");
+  font-weight: 500;
 }
 
 @font-face {
-    font-family: "MoMA Sans";
-    src: url("https://www.moma.org/dist/node_modules/sol/dist/moma-sans/moma-sans__semibold.woff2")
-        format("woff2");
-    font-weight: 600;
+  font-family: "MoMA Sans";
+  src: url("https://www.moma.org/dist/node_modules/sol/dist/moma-sans/moma-sans__semibold.woff2")
+    format("woff2");
+  font-weight: 600;
 }
 
 @font-face {
-    font-family: "MoMA Sans";
-    src: url("https://www.moma.org/dist/node_modules/sol/dist/moma-sans/moma-sans__bold.woff2")
-        format("woff2");
-    font-weight: 700;
+  font-family: "MoMA Sans";
+  src: url("https://www.moma.org/dist/node_modules/sol/dist/moma-sans/moma-sans__bold.woff2")
+    format("woff2");
+  font-weight: 700;
 }
