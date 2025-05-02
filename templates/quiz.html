@@ -1,5 +1,4 @@
 {% extends "layout.html" %} {% block content %}
-
 <script
     type="text/javascript"
     src="{{ url_for('static', filename='js/quiz.js') }}"
@@ -10,9 +9,9 @@
     let qid   = {{ qid }};
     let total = {{ total }};
     let qType = "{{ q_type }}";
+    let static= {{ static }};
     window.correctAnswer = {{ answer | tojson }};
 </script>
-
 <div id="pageElements" class="container" style="min-height: calc(100vh - 4rem);">
   <!-- question header -->
   <div class="row">
@@ -21,6 +20,14 @@
     </div>
     <div class="col-12 subtitle text-start mt-2" id="question_content" style="font-size: 1rem; font-weight: normal;">
       {{ question }}
+      {% if static %}
+        <div style="margin-top: 1rem;">
+          <img src="{{ url_for('static', filename=static) }}"
+              alt="Related Step"
+              class="img-fluid"
+              style="max-height: 200px; border: 1px solid #ccc;" />
+        </div>
+      {% endif %}
     </div>
   </div>
 
@@ -34,15 +41,17 @@
   >
     {% if q_type in ['single','multi'] %}
       {% for choice in choices %}
-        <label class="d-flex align-items-center ps-0 w-100" id="choice">
-          <input
-            type="{{ 'radio' if q_type=='single' else 'checkbox' }}"
-            name="answer"
-            value="{{ loop.index0 }}"
-            style="transform: scale(0.8); vertical-align: middle; margin-right: 0.5rem;"
-          />
-          <span>{{ choice }}</span>
-        </label>
+        {% for key, value in choice.items() %}
+          <label class="d-flex align-items-center ps-0 w-100 shadow-at-hover" id="choice">
+            <input
+              type="{{ 'radio' if q_type=='single' else 'checkbox' }}"
+              name="answer"
+              value="{{ loop.index0 }}"
+              style="transform: scale(0.8); vertical-align: middle; margin-right: 0.5rem;"
+            />
+            <span>{{key}}. {{value}}</span>
+          </label>
+        {% endfor %}
       {% endfor %}
     {% else %}
       <input

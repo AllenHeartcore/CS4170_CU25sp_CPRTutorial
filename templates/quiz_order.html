@@ -54,9 +54,19 @@
             {% for i in range(1, 7) %}
             <div class="drop-box" data-index="{{ i }}">
                 <span class="order-number">{{ i }}</span>
+                {% if submitted %}
+                {% set submitted_num = images[i-1].num %}
+                {% set correct_num = i %}
+                {% if submitted_num == correct_num %}
+                    <div class="text-success mt-2">✔</div>
+                {% else %}
+                    <div class="text-danger mt-2">✘</div>
+                {% endif %}
+                {% endif %}
             </div>
             {% endfor %}
         </div>
+
 
         <!-- navigation buttons -->
         <div class="row w-100 mt-5">
