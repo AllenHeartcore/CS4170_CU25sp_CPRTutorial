@@ -51,9 +51,21 @@ $(function () {
       let userDisplay = "";
 
       if (qType === "fill") {
-        isCorrect = userAnswer.trim().toLowerCase() === correct.trim().toLowerCase();
-        userDisplay = `<b>Your answer:</b> ${userAnswer}`;
-        displayAnswer = `<b>Correct:</b> ${correct}`;
+        if (Array.isArray(correct)) {
+          userAnswer = userAnswer.split(/[\s,，|]+/)
+                                                .map(s => parseInt(s))
+                                                .filter(n => !isNaN(n));
+
+          isCorrect = userAnswer.length === correct.length &&
+            userAnswer.every((v, i) => v === correct[i]);
+          userDisplay = `<b>Your answer:</b> ${userAnswer.join(', ')}`;
+          displayAnswer = `<b>Correct:</b> ${correct.join(', ')}`;
+        }
+        else {
+          isCorrect = userAnswer.trim().toLowerCase() === correct.trim().toLowerCase();
+          userDisplay = `<b>Your answer:</b> ${userAnswer}`;
+          displayAnswer = `<b>Correct:</b> ${correct}`;
+        }
       } else if (Array.isArray(correct)) {
         const userSorted = [...userAnswer].sort().join(",");
         const correctSorted = [...correct].sort().join(",");

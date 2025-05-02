@@ -1,0 +1,69 @@
+{% extends "layout.html" %} {% block content %}
+
+<script
+    type="text/javascript"
+    src="{{ url_for('static', filename='js/rhythm.js') }}"
+></script>
+
+<div id="pageElements" class="container d-flex flex-column">
+    <div class="row">
+        <div class="col-md-12 title">
+            Memorize the <br />
+            CPR rhythm!
+        </div>
+        <div class="col-md-12 subtitle mt-4 text-regular">
+            The ideal range is <br />
+            <span class="text-bold">100~120</span> presses <br />
+            per minute.
+        </div>
+    </div>
+
+    <div class="row mt-5 gx-0 bpmstat-key">
+        <div class="col-3">
+            <div class="">TAPS</div>
+        </div>
+        <div class="col-6">
+            <div class="bpmstat-key">BPM</div>
+        </div>
+        <div class="col-3">
+            <div class="bpmstat-key">TIME</div>
+        </div>
+    </div>
+
+    <div class="row gx-0 bpmstat-value">
+        <div class="col-3">
+            <div id="tapsDisplay">0</div>
+        </div>
+        <div class="col-6">
+            <span id="bpmDisplayMajor" class="mx-0">0</span
+            ><span id="bpmDisplayMinor" class="mx-0 bpmstat-value-s">.00</span>
+        </div>
+        <div class="col-3">
+            <span id="timeDisplayMajor" class="mx-0">0</span
+            ><span id="timeDisplayMinor" class="mx-0 bpmstat-value-s">.0</span>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-12 text-center">
+            <div id="p5MeterCanvas"></div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-12 text-center">
+            <div id="tapContainer">
+                <div id="p5ButtonCanvas"></div>
+                <button id="tapButton">TAP</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-1 text-bold text-italic">
+        <div class="col-12 text-center">
+            <div id="rhythmStatus">Tap to start</div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

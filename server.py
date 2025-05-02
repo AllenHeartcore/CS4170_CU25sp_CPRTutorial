@@ -76,6 +76,10 @@ def steps(id):
     )
 
 
+@app.route("/rhythm")
+def rhythm():
+    return render_template("rhythm.html")
+
 
 @app.route("/quiz/<int:qid>", methods=["GET", "POST"])
 def quiz(qid):
@@ -85,33 +89,44 @@ def quiz(qid):
     if not (1 <= qid <= total):
         return redirect(url_for("quiz", qid=1))
 
-    # order
     if qid == total:
-        #random 1–6
+        correct_order = [str(i) for i in range(1, 7)]
+
+        if request.method == "POST":
+            order = request.form.getlist("order") 
+            is_correct = order == correct_order
+
+            images = [
+                {"num": int(num), "url": url_for("static", filename=f"img/step{num}.svg")}
+                for num in order
+            ]
+
+            return render_template(
+                "quiz_order.html",
+                qid=qid,
+                total=total,
+                images=images,
+                submitted=True,
+                result=is_correct
+            )
+
         steps = list(range(1, 7))
         random.shuffle(steps)
         images = [
             {"num": num, "url": url_for("static", filename=f"img/step{num}.svg")}
             for num in steps
         ]
-        if request.method == "POST":
-            order = request.form.getlist("order")
-            # TODO: grade
-            return redirect(url_for("home"))
         return render_template(
             "quiz_order.html",
             qid=qid,
             total=total,
             images=images,
+            submitted=False
         )
 
-    #normal quiz
     quiz_obj = cpr_quizzes[qid - 1]
     if request.method == "POST":
-        # TODO: grade
-        if qid < total:
-            return redirect(url_for("quiz", qid=qid + 1))
-        return redirect(url_for("home"))
+        return redirect(url_for("quiz", qid=qid + 1 if qid < total else "home"))
 
     return render_template(
         "quiz.html",
@@ -121,7 +136,9 @@ def quiz(qid):
         q_type=quiz_obj["type"],
         choices=quiz_obj.get("choices", []),
         answer=quiz_obj["answer"],
+        static=quiz_obj.get('static', '')
     )
+
 
 
 
