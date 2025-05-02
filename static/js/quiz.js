@@ -4,18 +4,18 @@ $(function () {
   const _qid = qid;
   const _total = total;
 
-  const $prev = $("#quizPrev");
+  // const $prev = $("#quizPrev");
   const $next = $("#quizNext");
   const $form = $("#quizForm");
 
   // hide Prev on first question
-  if (_qid === 1) {
-    $prev.hide();
-  }
+  // if (_qid === 1) {
+  //   $prev.hide();
+  // }
 
   // set button text
   if (_qid === _total) {
-    $next.html('Submit <i class="bi bi-arrow-right"></i>');
+    $next.html('Finish <i class="bi bi-arrow-right"></i>');
   } else {
     $next.html('<i class="bi bi-arrow-right"></i>');
   }
@@ -35,7 +35,7 @@ $(function () {
         valid = userAnswer.length > 0;
       } else {
         userAnswer = $form.find("input[name='answer']:checked").map(function () {
-          return parseInt($(this).val());
+          return $(this).val();
         }).get();
         valid = userAnswer.length > 0;
       }
@@ -44,8 +44,7 @@ $(function () {
         return alert("Please provide an answer 👍");
       }
 
-      // ✅ 检查是否正确
-      // ✅ 判断对错 + 构造答案对比内容
+  
       let isCorrect = false;
       let displayAnswer = "";
       let userDisplay = "";
@@ -59,54 +58,86 @@ $(function () {
           isCorrect = userAnswer.length === correct.length &&
             userAnswer.every((v, i) => v === correct[i]);
           userDisplay = `<b>Your answer:</b> ${userAnswer.join(', ')}`;
-          displayAnswer = `<b>Correct:</b> ${correct.join(', ')}`;
+          displayAnswer = `<b>Correct answer:</b> ${correct.join(', ')}`;
         }
         else {
           isCorrect = userAnswer.trim().toLowerCase() === correct.trim().toLowerCase();
           userDisplay = `<b>Your answer:</b> ${userAnswer}`;
-          displayAnswer = `<b>Correct:</b> ${correct}`;
+          displayAnswer = `<b>Correct answer:</b> ${correct}`;
         }
-      } else if (Array.isArray(correct)) {
-        const userSorted = [...userAnswer].sort().join(",");
-        const correctSorted = [...correct].sort().join(",");
-        isCorrect = userSorted === correctSorted;
-
-        userDisplay = `<b>Your answer:</b><br>` + userAnswer.map(i => $("label").eq(i).text().trim()).join("<br>");
-        displayAnswer = `<b>Correct:</b><br>` + correct.map(i => $("label").eq(i).text().trim()).join("<br>");
-      } else {
-        isCorrect = userAnswer[0] === correct;
-        userDisplay = `<b>Your answer:</b> ${$("label").eq(userAnswer[0]).text().trim()}`;
-        displayAnswer = `<b>Correct:</b> ${$("label").eq(correct).text().trim()}`;
+      } else if (qType === "multi") {
+        console.log('I am here for multi');
+        // userAnswer: e.g. ["A","B"]
+        // correct:     e.g. ["A","B"]
+        const ua = userAnswer;
+        const ca = Array.isArray(correct) ? correct : [correct];
+      
+        // 多选按字母排序再对比
+        const sortedU = [...ua].sort().join(",");
+        const sortedC = [...ca].sort().join(",");
+        isCorrect = sortedU === sortedC;
+      
+        // 只 display key，不去拿 label 文本
+        userDisplay   = `<b>Your answer:</b> ${ua.join(", ")}`;
+        displayAnswer = `<b>Correct answer:</b> ${ca.join(", ")}`;
+      }
+      else {  // 单选题
+        console.log('I am here for single');
+        const ua = userAnswer[0];    // e.g. "C"
+        const ca = correct;          // e.g. "C"
+        isCorrect    = ua === ca;
+        userDisplay   = `<b>Your answer:</b> ${ua}`;
+        displayAnswer = `<b>Correct answer:</b> ${ca}`;
       }
 
-      // ✅ 添加对错提示前缀
       let resultPrefix = isCorrect
-        ? `<div class="text-success fw-bold mb-2">✅ You answered correctly!</div>`
-        : `<div class="text-danger fw-bold mb-2">❌ That's incorrect.</div>`;
+      ? `<span class="text-success fw-bold">✅ Correct! </span>`
+      : `<span class="text-danger fw-bold">❌ Incorrect! </span>`;
 
-      // ✅ 拼接所有展示内容
-      let finalHtml = resultPrefix + userDisplay + "<hr>" + displayAnswer;
+      let finalHtml = userDisplay + "<hr>" + displayAnswer;
+
+      $('#collapseTitle').html(resultPrefix);
 
       $("#correctAnswerText").html(finalHtml);
-      $("#answerCard").removeClass("d-none");  // ✅ 显示卡片
+
+
+      $("#answerAccordion").removeClass("d-none");
+
+
+      const collapseEl = document.getElementById('collapseAnswer');
+      const btn        = document.querySelector('#headingAnswer button');
+
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        const isOpen = collapseEl.classList.toggle('show');
+        btn.classList.toggle('collapsed', !isOpen);
+        btn.setAttribute('aria-expanded', isOpen);
+      });
+
+      
+
       $('html, body').animate({
-        scrollTop: $("#answerCard").offset().top - 100
-      }, 300);  // ✅ 滚动到卡片位置
+        scrollTop: $('#collapseAnswer').offset().top - 100
+      }, 300);
+
+      $form.find('input[name="answer"]').prop('disabled', true);
+      $form.find('input[name="answer_text"]').prop('disabled', true);
 
       answered = true;
       return;
 
 
-      if (!answered) {
-        $("#correctAnswerText").html(finalHtml);
-        $("#answerCard").removeClass("d-none");
-        answered = true;
+      // if (!answered) {
+      //   $("#correctAnswerText").html(finalHtml);
+      //   $("#answerCard").removeClass("d-none");
+      //   answered = true;
       
-        $('html, body').animate({
-          scrollTop: $("#answerCard").offset().top - 100
-        }, 300);
-        return;  // ✅ 防止立即跳转
-      }
+      //   $('html, body').animate({
+      //     scrollTop: $("#answerCard").offset().top - 100
+      //   }, 300);
+      //   return;  // ✅ 防止立即跳转
+      // }
       
 
 

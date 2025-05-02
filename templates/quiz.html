@@ -9,7 +9,7 @@
     let qid   = {{ qid }};
     let total = {{ total }};
     let qType = "{{ q_type }}";
-    let static= {{ static }};
+    let static= {{ static|tojson }};
     window.correctAnswer = {{ answer | tojson }};
 </script>
 <div id="pageElements" class="container" style="min-height: calc(100vh - 4rem);">
@@ -22,7 +22,7 @@
       {{ question }}
       {% if static %}
         <div style="margin-top: 1rem;">
-          <img src="{{ url_for('static', filename=static) }}"
+          <img src="{{ static }}"
               alt="Related Step"
               class="img-fluid"
               style="max-height: 200px; border: 1px solid #ccc;" />
@@ -46,7 +46,7 @@
             <input
               type="{{ 'radio' if q_type=='single' else 'checkbox' }}"
               name="answer"
-              value="{{ loop.index0 }}"
+              value="{{ key }}"
               style="transform: scale(0.8); vertical-align: middle; margin-right: 0.5rem;"
             />
             <span>{{key}}. {{value}}</span>
@@ -62,20 +62,41 @@
       />
     {% endif %}
 
-    <div id="answerCard" class="card mt-4 d-none">
-      <div class="card-body">
-        <p class="card-text" id="correctAnswerText"></p>
+  <div
+    id="answerAccordion"
+    class="accordion mt-4 d-none"
+  >
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingAnswer">
+        <button
+          class="accordion-button collapsed"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseAnswer"
+          aria-expanded="false"
+          aria-controls="collapseAnswer"
+        >
+          <span id="collapseTitle"></span>
+        </button>
+      </h2>
+      <div
+        id="collapseAnswer"
+        class="accordion-collapse collapse"
+        aria-labelledby="headingAnswer"
+        data-bs-parent="#answerAccordion"
+      >
+        <div class="accordion-body">
+          <p class="card-text" id="correctAnswerText"></p>
+        </div>
       </div>
     </div>
+  </div>
+
     
 
     <!-- navigation buttons -->
     <div class="row w-100 mt-5">
-      <div class="col-6 d-flex justify-content-start">
-        <button type="button" class="btn-sleek" id="quizPrev">
-          <i class="bi bi-arrow-left"></i>
-        </button>
-      </div>
+      <div class="col-6"></div>
       <div class="col-6 d-flex justify-content-end">
         <button type="button" class="btn-sleek" id="quizNext">
           <i class="bi bi-arrow-right"></i>

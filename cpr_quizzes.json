@@ -21,7 +21,7 @@
       {"C": "Keep the victim's mouth completely closed"}
     ],
     "answer": ["A", "B"],
-    "static": "./static/img/step3.svg"
+    "static": "/static/img/step3.svg"
   },
   "3": {
     "id": 3,
@@ -76,7 +76,7 @@
       {"D": "Rescue Breaths"}
     ],
     "answer": "C",
-    "static": "./static/step5.svg"
+    "static": "/static/img/step5.svg"
   },
   "8": {
     "id": 8,
@@ -101,6 +101,6 @@
       {"D": "Wait one minute before taking any action"}
   ],
   "answer": "C",
-  "static": "./static/step2.svg"
+  "static": "/static/img/step2.svg"
 }
 }
