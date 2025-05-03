@@ -1,8 +1,8 @@
 import random
 from flask import (
     Flask, render_template,
-    request, redirect, url_for,
-    jsonify, Response
+    request, redirect, session, url_for,
+    jsonify, Response,
 )
 from markdown import markdown
 from markupsafe import Markup
@@ -127,7 +127,7 @@ def quiz(qid):
 
     quiz_obj = cpr_quizzes[qid - 1]
     if request.method == "POST":
-        return redirect(url_for("quiz", qid=qid + 1 if qid < total else "home"))
+        return redirect(url_for("guide"))
 
     return render_template(
         "quiz.html",
@@ -140,9 +140,9 @@ def quiz(qid):
         static=quiz_obj.get('static', '')
     )
 
-@app.route("/quiz/grade", methods=["GET"])
-def grade():
-    return render_template("grade.html")
+@app.route("/guide", methods=["GET"])
+def guide():
+    return render_template("guide.html", flag_steps_completed=True,)
 
 
 if __name__ == "__main__":

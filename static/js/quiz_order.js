@@ -8,23 +8,23 @@ $(function () {
         alert("jQuery failed to load");
         return;
     }
+    let answered = false;
     const _qid = qid,
         _total = total;
-    const $prev = $("#quizPrev"),
-        $next = $("#quizNext"),
+    const $next = $("#quizNext"),
         $choices = $("#choices"),
         $boxes = $(".drop-box"),
         $form = $("#orderForm");
 
-    // Prev/Next buttons
-    if (_qid === 1) $prev.hide();
-    else
-        $prev
-            .show()
-            .on("click", () => window.location.assign(`/quiz/${_qid - 1}`));
+    // // Prev/Next buttons
+    // if (_qid === 1) $prev.hide();
+    // else
+    //     $prev
+    //         .show()
+    //         .on("click", () => window.location.assign(`/quiz/${_qid - 1}`));
     $next.html(
         _qid === _total
-            ? 'Submit <i class="bi bi-arrow-right"></i>'
+            ? 'Finish <i class="bi bi-arrow-right"></i>'
             : 'Next <i class="bi bi-arrow-right"></i>'
     );
 
@@ -135,11 +135,13 @@ $(function () {
 
     // —— Next/Submit logic ——
     $next.on("click", (e) => {
+        console.log(answered)
         e.preventDefault();
 
         if (answered) {
             if (_qid === _total) {
-                $form.submit();
+                //$form.submit();
+                window.location.assign("/guide");
             } else {
                 window.location.assign(`/quiz/${_qid + 1}`);
             }
@@ -196,9 +198,6 @@ $(function () {
         $('html, body').animate({
             scrollTop: $('#collapseAnswer').offset().top - 100
         }, 300);
-
-        // submit or next
-        if (_qid === _total) $form.submit();
-        else window.location.assign(`/quiz/${_qid + 1}`);
+        return;
     });
 });

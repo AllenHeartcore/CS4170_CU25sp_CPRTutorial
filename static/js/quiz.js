@@ -99,6 +99,11 @@ $(function () {
       $('#collapseTitle').html(resultPrefix);
 
       $("#correctAnswerText").html(finalHtml);
+      $form.append(
+        $("<input>")
+          .attr("type", "hidden")
+          .attr("name", "is_correct")
+      );
 
 
       $("#answerAccordion").removeClass("d-none");
