@@ -68,7 +68,7 @@
     "question": "Don't Give Up!  Continue cycles of __ compressions and __ breaths.",
     "type": "fill",
     "answer": [30, 2],
-    "static": ""
+    "static": ["/static/img/step5_question.svg", "/static/img/step6_question.svg"]
   },
   "7": {
     "id": 7,
@@ -81,7 +81,7 @@
       {"D": "Rescue Breaths"}
     ],
     "answer": "C",
-    "static": ["/static/img/step5_question.svg", "/static/img/step6_question.svg"]
+    "static": "/static/img/step5.svg"
   },
   "8": {
     "id": 8,

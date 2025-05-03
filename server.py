@@ -2,7 +2,7 @@ import random
 from flask import (
     Flask, render_template,
     request, redirect, session, url_for,
-    jsonify, Response,
+    jsonify, Response, after_this_request
 )
 from markdown import markdown
 from markupsafe import Markup
@@ -93,7 +93,13 @@ def quiz(qid):
     if qid == 1 and "score" not in session:
         session["score"] = 0
 
+    if qid != 1 and "score" not in session:
+        return redirect(url_for("quiz", qid=1))
+
     if qid == total:
+        if session.get("submitted_final"):
+            return redirect(url_for("guide"))
+        
         correct_order = [str(i) for i in range(1, 7)]
 
         if request.method == "POST":
@@ -102,12 +108,21 @@ def quiz(qid):
             if is_correct:
                 session["score"] += 10
 
+            session["submitted_final"] = True 
             images = [
                 {"num": int(num), "url": url_for("static", filename=f"img/step{num}.svg")}
                 for num in order
             ]
 
-            return render_template("guide.html", flag_steps_completed=True, score=session.get('score', 0))
+            return render_template(
+                "quiz_order.html",
+                qid=qid,
+                total=total,
+                images=images,
+                submitted=True,
+                order=order  
+            )
+
 
         steps = list(range(1, 7))
         random.shuffle(steps)
@@ -143,7 +158,16 @@ def quiz(qid):
 
 @app.route("/guide", methods=["GET"])
 def guide():
-    return render_template("guide.html", flag_steps_completed=True, score=session.get('score', 0))
+    total = len(cpr_quizzes) + 1 
+    if not session.get("submitted_final"):
+        return redirect(url_for("quiz", qid=1))
+    @after_this_request
+    def remove_session_vars(response):
+        session.pop("score", None)
+        session.pop("submitted_final", None)
+        return response
+    return render_template("guide.html", flag_steps_completed=True, score=session.get('score', 0), total=total)
+
 
 
 if __name__ == "__main__":

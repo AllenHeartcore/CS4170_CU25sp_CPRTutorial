@@ -8,14 +8,14 @@ $(function () {
         alert("jQuery failed to load");
         return;
     }
-    let answered = false;
+    let answered = window.answered;
     const _qid = qid,
         _total = total;
     const $next = $("#quizNext"),
         $choices = $("#choices"),
         $boxes = $(".drop-box"),
         $form = $("#orderForm");
-
+    let checked = false;
     // // Prev/Next buttons
     // if (_qid === 1) $prev.hide();
     // else
@@ -140,9 +140,13 @@ $(function () {
 
         if (answered) {
             if (_qid === _total) {
-                $form.submit();
-                // window.location.assign("/guide");
-            } else {
+                window.location.reload();  
+                return;
+            } 
+            // else if (_qid === _total || checked) {
+            //     window.location.assign("/guide");
+            // }
+            else {
                 window.location.assign(`/quiz/${_qid + 1}`);
             }
             return; 
@@ -191,13 +195,14 @@ $(function () {
         bsCollapse.show();  // 自动展开，但保留按钮控制功能
         }
 
-        // 自动滚动到答案区域（平滑）
-        document.getElementById("answerAccordion").scrollIntoView({ behavior: "smooth" });
+        // // 自动滚动到答案区域（平滑）
+        // document.getElementById("answerAccordion").scrollIntoView({ behavior: "smooth" });
         
 
         $('html, body').animate({
             scrollTop: $('#collapseAnswer').offset().top - 100
         }, 300);
-        return;
+        $form.submit()
+
     });
 });

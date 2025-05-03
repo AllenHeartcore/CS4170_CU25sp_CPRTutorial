@@ -1,4 +1,5 @@
-{% extends "layout.html" %} {% block content %}
+{% extends "layout.html" %} 
+{% block content %}
 
 <script
   type="text/javascript"
@@ -11,13 +12,51 @@
 </script>
 
 <div id="pageElements" class="container">
+
   <div class="row">
     <div class="col-md-12 text-tightline">
         <span class="text-bold text-red"> Congratulations </span> on
-        finishing the quiz part! You can go back to the sections below or leave if you want!
+        finishing the quiz part! The result for your quizz is:
     </div>
   </div>
 
+  {% if score is defined %}
+  {% set percent = (score / (total * 10)) * 100 %}
+  {% if percent < 60 %}
+    {% set stroke_color = '#dc3545' %}
+  {% elif percent < 80 %}
+    {% set stroke_color = '#ffc107' %}
+  {% else %}
+    {% set stroke_color = '#198754' %}
+  {% endif %}
+  <div class="row justify-content-center my-4">
+    <div class="col-auto d-flex flex-column align-items-center">
+      <svg width="160" height="160" class="mb-2">
+      
+        <circle cx="80" cy="80" r="70" stroke="#e9ecef" stroke-width="15" fill="none" />
+        
+        <circle cx="80" cy="80" r="70"
+                stroke="{{ stroke_color }}"
+                stroke-width="15"
+                fill="none"
+                stroke-dasharray="439.82"
+                stroke-dashoffset="{{ 439.82 * (1 - percent / 100) }}"
+                transform="rotate(-90 80 80)" />
+        
+        <text x="50%" y="50%" text-anchor="middle" dy=".3em" font-size="22" font-weight="bold">
+          {{ percent | round(1) }}%
+        </text>
+      </svg>
+      <h5 class="mt-2">Score: {{ score }} / {{ total * 10 }}</h5>
+    </div>
+  </div>
+{% endif %}
+
+  <div class="row">
+    <div class="col-md-12 text-tightline">
+      You can go back to the sections below or leave if you want!
+    </div>
+  </div>
   <div class="row mt-3">
     <div class="col-md-12 fs-4 btn-navlist">
       <button class="btn-sleek mt-5 w-75" id="home2Steps">
@@ -26,30 +65,18 @@
       <button
         class="btn-sleek mt-5 w-75"
         id="home2Rhythm"
-        {%
-        if
-        not
-        flag_steps_completed
-        %}
+        {% if not flag_steps_completed %}
         disabled
-        {%
-        endif
-        %}
+        {% endif %}
       >
         Rhythm Training
       </button>
       <button
         class="btn-sleek mt-5 w-75"
         id="home2Quiz"
-        {%
-        if
-        not
-        flag_steps_completed
-        %}
+        {% if not flag_steps_completed %}
         disabled
-        {%
-        endif
-        %}
+        {% endif %}
       >
         Test Your Knowledge
       </button>

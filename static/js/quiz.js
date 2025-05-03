@@ -111,16 +111,16 @@ $(function () {
       $("#answerAccordion").removeClass("d-none");
 
 
-      const collapseEl = document.getElementById('collapseAnswer');
-      const btn        = document.querySelector('#headingAnswer button');
+      // const collapseEl = document.getElementById('collapseAnswer');
+      // const btn        = document.querySelector('#headingAnswer button');
 
-      btn.addEventListener('click', function(e) {
-        e.preventDefault();
+      // btn.addEventListener('click', function(e) {
+      //   e.preventDefault();
 
-        const isOpen = collapseEl.classList.toggle('show');
-        btn.classList.toggle('collapsed', !isOpen);
-        btn.setAttribute('aria-expanded', isOpen);
-      });
+      //   const isOpen = collapseEl.classList.toggle('show');
+      //   btn.classList.toggle('collapsed', !isOpen);
+      //   btn.setAttribute('aria-expanded', isOpen);
+      // });
 
       
 

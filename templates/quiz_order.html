@@ -1,14 +1,15 @@
 {% extends "layout.html" %} {% block content %}
+<script>
+  let qid   = {{ qid }};
+  let total = {{ total }};
+  window.answered = {{ 'true' if submitted else 'false' }};
+</script>
+
 <script
     type="text/javascript"
     src="{{ url_for('static', filename='js/quiz_order.js') }}"
 ></script>
 
-<script>
-    // expose quiz metadata to quiz_order.js
-    let qid   = {{ qid }};
-    let total = {{ total }};
-</script>
 
 <div
     id="pageElements"
@@ -76,7 +77,7 @@
                     />
                   </div>
                   {# then your ✓/✗ indicator #}
-                  {% if chosen_num|int == i %}
+                  {% if img_obj['num'] == i %}
                     <div class="text-success mt-2">✅</div>
                   {% else %}
                     <div class="text-danger  mt-2">❌</div>
