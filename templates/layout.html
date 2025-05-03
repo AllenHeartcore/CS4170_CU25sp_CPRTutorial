@@ -41,33 +41,55 @@
     />
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
-      <div class="container w-100" id="navbarNav">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #f5dada;">
+      <div class="container w-100">
         <a class="navbar-brand" href="/">
-          <!-- display a transparent image placeholder to prevent flickering -->
           <img
             src="{{ url_for('static', filename='img/logo.svg') }}"
             id="navbarSticker"
             class="me-2"
+            alt="Logo"
+            width="40"
+            height="40"
           />
           <span id="navbarText" class="fs-3">
             <span class="text-bold">CPR Tutorial</span>
           </span>
         </a>
-
+    
+        <!-- 折叠按钮 -->
         <button
           class="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
+          data-bs-target="#navbarMenu"
+          aria-controls="navbarMenu"
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
           <span class="navbar-toggler-icon"></span>
         </button>
+    
+        <!-- 折叠菜单内容 -->
+        <div class="collapse navbar-collapse justify-content-end" id="navbarMenu">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('steps', id=1) }}">Learn the Steps</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('rhythm') }}">Rhythm Training</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('quiz', qid=1) }}">Test Your Knowledge</a>
+            </li>
+          </ul>
+        </div>
       </div>
     </nav>
+    
 
     <!-- Content -->
     <div class="container d-flex flex-column">
