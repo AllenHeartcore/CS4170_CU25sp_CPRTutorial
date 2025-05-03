@@ -140,7 +140,9 @@ def quiz(qid):
         static=quiz_obj.get('static', '')
     )
 
-
+@app.route("/quiz/grade", methods=["GET"])
+def grade():
+    return render_template("grade.html")
 
 
 if __name__ == "__main__":
