@@ -107,7 +107,8 @@ def quiz(qid):
                 total=total,
                 images=images,
                 submitted=True,
-                result=is_correct
+                result=is_correct,
+                order=order
             )
 
         steps = list(range(1, 7))

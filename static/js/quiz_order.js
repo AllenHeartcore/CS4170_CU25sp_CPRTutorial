@@ -45,6 +45,7 @@ $(function () {
         const $exist = $box.find("img.draggable");
         if ($exist.length) $choices.append($exist);
         $box.append($img);
+        $box.find('.order-number').hide();
     }
 
     // —— Mouse drag/drop ——
@@ -157,6 +158,17 @@ $(function () {
                     .val(num)
             );
         });
+        
+        answered = true;
+        
+        $choices.find('img.draggable').prop('draggable', false);
+        // prevent any more highlighting or dropping
+        $boxes.off('dragover dragleave drop');
+        // block touch/mouse handlers entirely
+        $(document)
+          .off('dragstart dragend touchstart touchmove touchend');
+        
+        $('#choices').hide();
 
         // submit or next
         if (_qid === _total) $form.submit();

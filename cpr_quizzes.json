@@ -9,7 +9,8 @@
       {"C": "50 compressions"},
       {"D": "100 compressions"}
     ],
-    "answer": "B"
+    "answer": "B",
+    "static": "/static/img/step5_question.svg"
   },
   "2": {
     "id": 2,
@@ -33,7 +34,8 @@
       {"C": "Feel for breath on the cheek"},
       {"D": "Tap the victim's shoulders"}
     ],
-    "answer": ["A", "B", "C"]
+    "answer": ["A", "B", "C"],
+    "static": "/static/img/step4.svg"
   },
   "4": {
     "id": 4,
@@ -45,7 +47,8 @@
       {"C": "Push down slowly and gently"},
       {"D": "Compress hard and fast"}
     ],
-    "answer": ["B", "D"]
+    "answer": ["B", "D"],
+    "static": "/static/img/step5.svg"
   },
   "5": {
     "id": 5,
@@ -57,13 +60,15 @@
       {"C": "Blow for at least 3 seconds"},
       {"D": "Release the nose during exhalation"}
     ],
-    "answer": ["A", "B"]
+    "answer": ["A", "B"],
+    "static": "/static/img/step6.svg"
   },
   "6": {
     "id": 6,
     "question": "Don't Give Up!  Continue cycles of __ compressions and __ breaths.",
     "type": "fill",
-    "answer": [30, 2]
+    "answer": [30, 2],
+    "static": ""
   },
   "7": {
     "id": 7,
@@ -76,7 +81,7 @@
       {"D": "Rescue Breaths"}
     ],
     "answer": "C",
-    "static": "/static/img/step5.svg"
+    "static": ["/static/img/step5_question.svg", "/static/img/step6_question.svg"]
   },
   "8": {
     "id": 8,
@@ -92,7 +97,7 @@
   },
   "9": {
     "id": 9,
-    "question": "Call for help – what should you do *immediately* after determining the victim is unresponsive?",
+    "question": "Call for help – what should you do immediately after determining the victim is unresponsive?",
     "type": "single",
     "choices": [
       {"A": "Start chest compressions right away"},
