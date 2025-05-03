@@ -136,6 +136,16 @@ $(function () {
     // —— Next/Submit logic ——
     $next.on("click", (e) => {
         e.preventDefault();
+
+        if (answered) {
+            if (_qid === _total) {
+                $form.submit();
+            } else {
+                window.location.assign(`/quiz/${_qid + 1}`);
+            }
+            return; 
+        }
+
         let valid = true;
         $boxes.each(function () {
             if (!$(this).find("img.draggable").length) valid = false;
@@ -169,6 +179,23 @@ $(function () {
           .off('dragstart dragend touchstart touchmove touchend');
         
         $('#choices').hide();
+
+        $("#answerAccordion").removeClass("d-none");
+
+
+        const collapseEl = document.getElementById("collapseAnswer");
+        if (collapseEl) {
+        const bsCollapse = bootstrap.Collapse.getOrCreateInstance(collapseEl);
+        bsCollapse.show();  // 自动展开，但保留按钮控制功能
+        }
+
+        // 自动滚动到答案区域（平滑）
+        document.getElementById("answerAccordion").scrollIntoView({ behavior: "smooth" });
+        
+
+        $('html, body').animate({
+            scrollTop: $('#collapseAnswer').offset().top - 100
+        }, 300);
 
         // submit or next
         if (_qid === _total) $form.submit();
