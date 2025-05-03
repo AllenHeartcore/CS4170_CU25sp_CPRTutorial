@@ -140,8 +140,8 @@ $(function () {
 
         if (answered) {
             if (_qid === _total) {
-                //$form.submit();
-                window.location.assign("/guide");
+                $form.submit();
+                // window.location.assign("/guide");
             } else {
                 window.location.assign(`/quiz/${_qid + 1}`);
             }

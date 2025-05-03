@@ -28,6 +28,7 @@ cpr_quizzes = load_quizzes("cpr_quizzes.json")
 
 
 app = Flask(__name__)
+app.secret_key = "your_secret_key"
 FLAG_XIPHOID_SEEN = False
 FLAG_STEPS_COMPLETED = False
 
@@ -88,6 +89,9 @@ def quiz(qid):
 
     if not (1 <= qid <= total):
         return redirect(url_for("quiz", qid=1))
+    
+    if qid == 1 and "score" not in session:
+        session["score"] = 0
 
     if qid == total:
         correct_order = [str(i) for i in range(1, 7)]
@@ -95,21 +99,15 @@ def quiz(qid):
         if request.method == "POST":
             order = request.form.getlist("order") 
             is_correct = order == correct_order
+            if is_correct:
+                session["score"] += 10
 
             images = [
                 {"num": int(num), "url": url_for("static", filename=f"img/step{num}.svg")}
                 for num in order
             ]
 
-            return render_template(
-                "quiz_order.html",
-                qid=qid,
-                total=total,
-                images=images,
-                submitted=True,
-                result=is_correct,
-                order=order
-            )
+            return render_template("guide.html", flag_steps_completed=True, score=session.get('score', 0))
 
         steps = list(range(1, 7))
         random.shuffle(steps)
@@ -127,7 +125,9 @@ def quiz(qid):
 
     quiz_obj = cpr_quizzes[qid - 1]
     if request.method == "POST":
-        return redirect(url_for("guide"))
+        if request.form.get("is_correct") == "1":
+            session["score"] += 10
+        return redirect(url_for("quiz", qid = qid + 1))
 
     return render_template(
         "quiz.html",
@@ -137,12 +137,13 @@ def quiz(qid):
         q_type=quiz_obj["type"],
         choices=quiz_obj.get("choices", []),
         answer=quiz_obj["answer"],
-        static=quiz_obj.get('static', '')
+        static=quiz_obj.get('static', ''),
+        score=session.get('score', 0)
     )
 
 @app.route("/guide", methods=["GET"])
 def guide():
-    return render_template("guide.html", flag_steps_completed=True,)
+    return render_template("guide.html", flag_steps_completed=True, score=session.get('score', 0))
 
 
 if __name__ == "__main__":

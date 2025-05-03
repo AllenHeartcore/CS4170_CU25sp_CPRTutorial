@@ -11,6 +11,7 @@
     let qType = "{{ q_type }}";
     let static= {{ static|tojson }};
     window.correctAnswer = {{ answer | tojson }};
+    window.score = {{ score | tojson }}
 </script>
 <div id="pageElements" class="container" style="min-height: calc(100vh - 4rem);">
   <!-- question header -->

@@ -103,7 +103,9 @@ $(function () {
         $("<input>")
           .attr("type", "hidden")
           .attr("name", "is_correct")
+          .val(isCorrect ? "1" : "0")  
       );
+      
 
 
       $("#answerAccordion").removeClass("d-none");
@@ -130,6 +132,7 @@ $(function () {
       $form.find('input[name="answer_text"]').prop('disabled', true);
 
       answered = true;
+      
       return;
 
 
@@ -149,10 +152,8 @@ $(function () {
     }
 
     // 第二次点击 → 跳转
-    if (_qid === _total) {
-      $form.submit();
-    } else {
-      window.location.assign(`/quiz/${_qid + 1}`);
-    }
+    
+    $form.submit();
+    console.log(window.score)
   });
 });
