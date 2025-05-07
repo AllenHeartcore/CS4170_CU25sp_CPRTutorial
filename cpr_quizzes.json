@@ -1,111 +1,114 @@
 {
-  "1": {
-    "id": 1,
-    "question": "During adult CPR, how many chest compressions should be delivered before giving rescue breaths?",
-    "type": "single",
-    "choices": [
-      {"A": "15 compressions"},
-      {"B": "30 compressions"},
-      {"C": "50 compressions"},
-      {"D": "100 compressions"}
-    ],
-    "answer": "B",
-    "static": "/static/img/step5_question.svg"
-  },
-  "2": {
-    "id": 2,
-    "question": "Open the Airway – select ALL correct actions.",
-    "type": "multi",
-    "choices": [
-      {"A": "Tilt the victim's head back"},
-      {"B": "Place both hands under the chin only"},
-      {"C": "Keep the victim's mouth completely closed"}
-    ],
-    "answer": ["A", "B"],
-    "static": "/static/img/step3.svg"
-  },
-  "3": {
-    "id": 3,
-    "question": "Check for Breathing – which THREE checks are recommended?",
-    "type": "multi",
-    "choices": [
-      {"A": "Look for chest movement"},
-      {"B": "Listen for breathing sounds"},
-      {"C": "Feel for breath on the cheek"},
-      {"D": "Tap the victim's shoulders"}
-    ],
-    "answer": ["A", "B", "C"],
-    "static": "/static/img/step4.svg"
-  },
-  "4": {
-    "id": 4,
-    "question": "Begin Chest Compressions – choose the TWO statements that are correct.",
-    "type": "multi",
-    "choices": [
-      {"A": "Hands placed on the xiphoid process"},
-      {"B": "Arms kept straight"},
-      {"C": "Push down slowly and gently"},
-      {"D": "Compress hard and fast"}
-    ],
-    "answer": ["B", "D"],
-    "static": "/static/img/step5.svg"
-  },
-  "5": {
-    "id": 5,
-    "question": "Rescue Breaths – pick the TWO essential steps.",
-    "type": "multi",
-    "choices": [
-      {"A": "Pinch the nose shut"},
-      {"B": "Seal your mouth over theirs"},
-      {"C": "Blow for at least 3 seconds"},
-      {"D": "Release the nose during exhalation"}
-    ],
-    "answer": ["A", "B"],
-    "static": "/static/img/step6.svg"
-  },
-  "6": {
-    "id": 6,
-    "question": "Don't Give Up!  Continue cycles of __ compressions and __ breaths.",
-    "type": "fill",
-    "answer": [30, 2],
-    "static": ["/static/img/step5_question.svg", "/static/img/step6_question.svg"]
-  },
-  "7": {
-    "id": 7,
-    "question": "Based on the image of the step, please choose the correct name for this step:",
-    "type": "single",
-    "choices": [
-      {"A": "Call for Help"},
-      {"B": "Open the Airway"},
-      {"C": "Chest Compressions"},
-      {"D": "Rescue Breaths"}
-    ],
-    "answer": "C",
-    "static": "/static/img/step5.svg"
-  },
-  "8": {
-    "id": 8,
-    "question": "Which action is the correct one to Locate the Xiphoid Process: ",
-    "type": "single",
-    "choices": [
-      {"A": "Measure two fingers below the belly button"},
-      {"B": "Slide up to the bottom of breastbone"},
-      {"C": "Massage the sternocleidomastoid muscle"},
-      {"D": "Apply pressure to the lower back"}
-    ],
-    "answer": "B"
-  },
-  "9": {
-    "id": 9,
-    "question": "Call for help – what should you do immediately after determining the victim is unresponsive?",
-    "type": "single",
-    "choices": [
-      {"A": "Start chest compressions right away"},
-      {"B": "Look for an AED only"},
-      {"C": "Call emergency services or ask someone else to call"},
-      {"D": "Wait one minute before taking any action"}
-  ],
-  "answer": "C",
-  "static": "/static/img/step2.svg"
-}
+    "1": {
+        "id": 1,
+        "question": "During adult CPR, how many chest compressions should be delivered before giving rescue breaths?",
+        "type": "single",
+        "choices": [
+            { "A": "15 compressions" },
+            { "B": "30 compressions" },
+            { "C": "50 compressions" },
+            { "D": "100 compressions" }
+        ],
+        "answer": "B",
+        "static": "/static/img/step5_question.svg"
+    },
+    "2": {
+        "id": 2,
+        "question": "Open the Airway – select ALL correct actions.",
+        "type": "multi",
+        "choices": [
+            { "A": "Tilt the victim's head back" },
+            { "B": "Place one hand under the chin only" },
+            { "C": "Keep the victim's mouth completely closed" }
+        ],
+        "answer": ["A", "B"],
+        "static": "/static/img/step3.svg"
+    },
+    "3": {
+        "id": 3,
+        "question": "Check for Breathing – which THREE checks are recommended?",
+        "type": "multi",
+        "choices": [
+            { "A": "Look for chest movement" },
+            { "B": "Listen for breathing sounds" },
+            { "C": "Feel for breath on the cheek" },
+            { "D": "Tap the victim's shoulders" }
+        ],
+        "answer": ["A", "B", "C"],
+        "static": "/static/img/step4.svg"
+    },
+    "4": {
+        "id": 4,
+        "question": "Begin Chest Compressions – choose the THREE statements that are correct.",
+        "type": "multi",
+        "choices": [
+            { "A": "Hands placed on the xiphoid process" },
+            { "B": "Arms kept straight" },
+            { "C": "Push down slowly and gently" },
+            { "D": "Compress hard and fast" }
+        ],
+        "answer": ["A", "B", "D"],
+        "static": "/static/img/step5.svg"
+    },
+    "5": {
+        "id": 5,
+        "question": "Rescue Breaths – pick the TWO essential steps.",
+        "type": "multi",
+        "choices": [
+            { "A": "Pinch the nose shut" },
+            { "B": "Seal your mouth over theirs" },
+            { "C": "Blow for at least 3 seconds" },
+            { "D": "Release the nose during exhalation" }
+        ],
+        "answer": ["A", "B"],
+        "static": "/static/img/step6.svg"
+    },
+    "6": {
+        "id": 6,
+        "question": "Don't Give Up!  Continue cycles of __ compressions and __ breaths.",
+        "type": "fill",
+        "answer": [30, 2],
+        "static": [
+            "/static/img/step5_question.svg",
+            "/static/img/step6_question.svg"
+        ]
+    },
+    "7": {
+        "id": 7,
+        "question": "Based on the image of the step, please choose the correct name for this step:",
+        "type": "single",
+        "choices": [
+            { "A": "Call for Help" },
+            { "B": "Open the Airway" },
+            { "C": "Chest Compressions" },
+            { "D": "Rescue Breaths" }
+        ],
+        "answer": "C",
+        "static": "/static/img/step5.svg"
+    },
+    "8": {
+        "id": 8,
+        "question": "Which action is the correct one to Locate the Xiphoid Process: ",
+        "type": "single",
+        "choices": [
+            { "A": "Measure two fingers below the belly button" },
+            { "B": "Slide up to the bottom of breastbone" },
+            { "C": "Massage the sternocleidomastoid muscle" },
+            { "D": "Apply pressure to the lower back" }
+        ],
+        "answer": "B"
+    },
+    "9": {
+        "id": 9,
+        "question": "Call for help – what should you do immediately after determining the victim is unresponsive?",
+        "type": "single",
+        "choices": [
+            { "A": "Start chest compressions right away" },
+            { "B": "Look for an AED only" },
+            { "C": "Call emergency services or ask someone else to call" },
+            { "D": "Wait one minute before taking any action" }
+        ],
+        "answer": "C",
+        "static": "/static/img/step2.svg"
+    }
 }
