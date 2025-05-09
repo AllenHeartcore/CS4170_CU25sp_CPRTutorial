@@ -13,31 +13,30 @@
     window.correctAnswer = {{ answer | tojson }};
     window.score = {{ score | tojson }}
 </script>
-<div id="pageElements" class="container" style="min-height: calc(100vh - 4rem);">
+<div id="pageElements" class="container">
   <!-- question header -->
   <div class="row">
-    <div class="col-12 text-start" id="question_title" style="line-height: 1.5;">
+    <div class="col-12 text-start" id="question_title">
       Question {{ qid }} of {{ total }}
     </div>
-    <div class="col-12 subtitle text-start mt-2" id="question_content" style="font-size: 1rem; font-weight: normal;">
+    <div class="col-12 subtitle mt-2 lh-sm fs-4 fw-normal" id="question_content">
       {{ question }}
       {% if static %}
         {% if static is string %}
           <div style="margin-top: 1rem;">
             <img src="{{ static }}"
                 alt="Related Step"
-                class="img-fluid"
-                style="max-height: 200px; border: 1px solid #ccc;" />
+                class="img-fluid mx-auto mt-3 w-50" />
           </div>
         {% else %}
-          <div class="row row-cols-1 row-cols-md-2 g-1 g-md-0 mt-4">
+          <div class="row row-cols-1 row-cols-md-2 g-2 g-md-0 mt-3">
             {% for img_path in static %}
-              <div class="col-3">
+              <div class="col-4">
                 <img
                   src="{{ img_path }}"
                   alt="Related Step {{ loop.index }}"
                   class="img-fluid"
-                  style="max-height: 200px; border: 1px solid #ccc;"
+                  style="border: 1px solid #ccc;"
                 />
               </div>
             {% endfor %}
@@ -111,9 +110,8 @@
     
 
     <!-- navigation buttons -->
-    <div class="row w-100 mt-5">
-      <div class="col-6"></div>
-      <div class="col-6 d-flex justify-content-end">
+    <div class="row w-100 mt-4">
+      <div class="col-12 d-flex justify-content-end">
         <button type="button" class="btn-sleek" id="quizNext">
           <i class="bi bi-arrow-right"></i>
         </button>

@@ -15,8 +15,8 @@
 
   <div class="row">
     <div class="col-md-12 text-tightline">
-        <span class="text-bold text-red"> Congratulations </span> on
-        finishing the quiz part! The result for your quizz is:
+        <span class="text-bold text-green"> Congratulations </span> on
+        completing the quiz! <br> Your score is:
     </div>
   </div>
 
@@ -29,7 +29,7 @@
   {% else %}
     {% set stroke_color = '#198754' %}
   {% endif %}
-  <div class="row justify-content-center my-4">
+  <div class="row justify-content-center my-5">
     <div class="col-auto d-flex flex-column align-items-center">
       <svg width="160" height="160" class="mb-2">
       
@@ -44,22 +44,16 @@
                 transform="rotate(-90 80 80)" />
         
         <text x="50%" y="50%" text-anchor="middle" dy=".3em" font-size="22" font-weight="bold">
-          {{ percent | round(1) }}%
+          {{ percent | round(0) }}%
         </text>
       </svg>
-      <h5 class="mt-2">Score: {{ score }} / {{ total * 10 }}</h5>
     </div>
   </div>
 {% endif %}
 
-  <div class="row">
-    <div class="col-md-12 text-tightline">
-      You can go back to the sections below or leave if you want!
-    </div>
-  </div>
   <div class="row mt-3">
     <div class="col-md-12 fs-4 btn-navlist">
-      <button class="btn-sleek mt-5 w-75" id="home2Steps">
+      <button class="btn-sleek mt-3 w-75" id="home2Steps">
         Learn the Steps
       </button>
       <button

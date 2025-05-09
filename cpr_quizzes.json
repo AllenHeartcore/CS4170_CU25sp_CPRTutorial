@@ -21,7 +21,7 @@
             { "B": "Place one hand under the chin only" },
             { "C": "Keep the victim's mouth completely closed" }
         ],
-        "answer": ["A", "B"],
+        "answer": ["A"],
         "static": "/static/img/step3.svg"
     },
     "3": {
