@@ -25,7 +25,7 @@
 
   background: var(--accent-color);
   clip-path: polygon(
-    0 0,
+    calc(95% - var(--offset)) calc(95% - var(--offset)),
     0 calc(100% - var(--offset)),
     calc(var(--offset)) 100%,
     100% 100%,
