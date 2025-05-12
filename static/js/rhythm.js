@@ -288,6 +288,10 @@ function onYouTubeIframeAPIReady() {
 $(document).ready(function () {
     $("#tapButton").click(updateBPM);
 
+    $("#rhythmHomeBtn").click(function () {
+        window.location.href = "/";
+    });
+
     $("#rhythmAssistToggle").click(function () {
         if (!player) return;
         let state = player.getPlayerState();
