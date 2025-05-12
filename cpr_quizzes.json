@@ -18,10 +18,10 @@
         "type": "multi",
         "choices": [
             { "A": "Tilt the victim's head back" },
-            { "B": "Place one hand under the chin only" },
+            { "B": "Place only one hand under the chin" },
             { "C": "Keep the victim's mouth completely closed" }
         ],
-        "answer": ["A"],
+        "answer": ["A", "B"],
         "static": "/static/img/step3.svg"
     },
     "3": {
