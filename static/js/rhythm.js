@@ -266,40 +266,6 @@ function updateBPM() {
     updateBPMDisplay(BPM, reset);
 }
 
-/* Standalone peripheral: YouTube audio-only playback */
-
-const STAY_ALIVE_YOUTUBE_ID = "fNFzfwLM72c";
-
-let player;
-
-function onYouTubeIframeAPIReady() {
-    player = new YT.Player("ytPlayer", {
-        height: "1",
-        width: "1",
-        videoId: STAY_ALIVE_YOUTUBE_ID,
-        playerVars: { autoplay: 0, controls: 0 },
-        events: {
-            onReady: (e) => {
-                player.setVolume(100);
-                $("#rhythmAssistToggle").removeClass("disabled");
-            },
-            onStateChange: (e) => {
-                onPlayerStateChange(e);
-            },
-        },
-    });
-}
-
-function onPlayerStateChange(event) {
-    if (event.data == YT.PlayerState.PLAYING) {
-        $("#rhythmAssistToggle").innerHTML =
-            'Music Assist <i class="bi bi-pause-fill"></i>';
-    } else {
-        $("#rhythmAssistToggle").innerHTML =
-            'Music Assist <i class="bi bi-play-fill"></i>';
-    }
-}
-
 /* ------------------------------ Main */
 
 $(document).ready(function () {
@@ -310,12 +276,14 @@ $(document).ready(function () {
     });
 
     $("#rhythmAssistToggle").click(function () {
-        if (!player) return;
-        let state = player.getPlayerState();
-        if (state === YT.PlayerState.PLAYING) {
-            player.pauseVideo();
+        const audio = $("#rhythmAssistAudio")[0]; // de-alias is mandatory
+        const toggle = $("#rhythmAssistToggle")[0];
+        if (audio.paused) {
+            audio.play();
+            toggle.innerHTML = 'Music Assist <i class="bi bi-pause-fill"></i>';
         } else {
-            player.playVideo();
+            audio.pause();
+            toggle.innerHTML = 'Music Assist <i class="bi bi-play-fill"></i>';
         }
     });
 });
