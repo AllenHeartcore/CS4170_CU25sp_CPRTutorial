@@ -274,13 +274,20 @@ let player;
 
 function onYouTubeIframeAPIReady() {
     player = new YT.Player("ytPlayer", {
-        height: "0",
-        width: "0",
+        height: "1",
+        width: "1",
         videoId: STAY_ALIVE_YOUTUBE_ID,
         playerVars: { autoplay: 0, controls: 0 },
-        events: { onReady: (e) => player.setVolume(100) },
+        events: {
+            onReady: (e) => {
+                player.setVolume(100);
+                $("#rhythmAssistToggle").removeClass("disabled");
+            },
+            onStateChange: (e) => {
+                onPlayerStateChange(e);
+            },
+        },
     });
-    $("#rhythmAssistToggle").removeClass("disabled");
 }
 
 function onPlayerStateChange(event) {
