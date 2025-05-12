@@ -4,6 +4,7 @@
     type="text/javascript"
     src="{{ url_for('static', filename='js/rhythm.js') }}"
 ></script>
+<script src="https://www.youtube.com/iframe_api"></script>
 
 <div id="pageElements" class="container d-flex flex-column">
     <div class="row">
@@ -62,6 +63,15 @@
     <div class="row mt-1 text-bold text-italic">
         <div class="col-12 text-center">
             <div id="rhythmStatus">Tap to start</div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-8 text-center">
+            <button id="rhythmAssistToggle" class="btn btn-primary fs-4 w-100">
+                Music Assist <i class="bi bi-play-fill"></i>
+            </button>
+            <div id="ytPlayer" class="d-none"></div>
         </div>
     </div>
 </div>

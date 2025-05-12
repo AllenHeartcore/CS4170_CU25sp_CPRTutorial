@@ -266,8 +266,37 @@ function updateBPM() {
     updateBPMDisplay(BPM, reset);
 }
 
+/* Standalone peripheral: YouTube audio-only playback */
+
+const STAY_ALIVE_YOUTUBE_ID = "fNFzfwLM72c";
+
+let player;
+let playing = false;
+
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player("ytPlayer", {
+        height: "0",
+        width: "0",
+        videoId: STAY_ALIVE_YOUTUBE_ID,
+        playerVars: { autoplay: 0, controls: 0 },
+        events: { onReady: (e) => player.setVolume(100) },
+    });
+}
+
 /* ------------------------------ Main */
 
 $(document).ready(function () {
     $("#tapButton").click(updateBPM);
+
+    $("#rhythmAssistToggle").click(function () {
+        if (!player) return;
+        let state = player.getPlayerState();
+        if (state === YT.PlayerState.PLAYING) {
+            player.pauseVideo();
+            this.innerHTML = 'Music Assist <i class="bi bi-play-fill"></i>';
+        } else {
+            player.playVideo();
+            this.innerHTML = 'Music Assist <i class="bi bi-pause-fill"></i>';
+        }
+    });
 });
