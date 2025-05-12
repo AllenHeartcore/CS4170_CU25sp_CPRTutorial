@@ -18,19 +18,18 @@ $(document).ready(function () {
 
   // id = 5, flag = false: 4<-
   // id = 5, flag = true:  4<- ->6
-  // id = 8, flag = any:   5<-
+  // id = 7, flag = any:   6<- ->/
+  // id = 8, flag = any:       ->5
 
   $("#stepPrev").click(function () {
-    if (id === 8) {
-      window.location.href = "/steps/5";
-    } else {
-      window.location.href = "/steps/" + (id - 1);
-    }
+    window.location.href = "/steps/" + (id - 1);
   });
 
   $("#stepNext").click(function () {
     if (id === 7) {
       window.location.href = "/";
+    } else if (id === 8) {
+      window.location.href = "/steps/5";
     } else {
       window.location.href = "/steps/" + (id + 1);
     }
