@@ -271,7 +271,6 @@ function updateBPM() {
 const STAY_ALIVE_YOUTUBE_ID = "fNFzfwLM72c";
 
 let player;
-let playing = false;
 
 function onYouTubeIframeAPIReady() {
     player = new YT.Player("ytPlayer", {
@@ -281,6 +280,17 @@ function onYouTubeIframeAPIReady() {
         playerVars: { autoplay: 0, controls: 0 },
         events: { onReady: (e) => player.setVolume(100) },
     });
+    $("#rhythmAssistToggle").removeClass("disabled");
+}
+
+function onPlayerStateChange(event) {
+    if (event.data == YT.PlayerState.PLAYING) {
+        $("#rhythmAssistToggle").innerHTML =
+            'Music Assist <i class="bi bi-pause-fill"></i>';
+    } else {
+        $("#rhythmAssistToggle").innerHTML =
+            'Music Assist <i class="bi bi-play-fill"></i>';
+    }
 }
 
 /* ------------------------------ Main */
@@ -297,10 +307,8 @@ $(document).ready(function () {
         let state = player.getPlayerState();
         if (state === YT.PlayerState.PLAYING) {
             player.pauseVideo();
-            this.innerHTML = 'Music Assist <i class="bi bi-play-fill"></i>';
         } else {
             player.playVideo();
-            this.innerHTML = 'Music Assist <i class="bi bi-pause-fill"></i>';
         }
     });
 });
