@@ -100,7 +100,7 @@
   background: transparent; /* pie shape handled by p5.js */
   color: white;
 
-  font-size: 3em;
+  font-size: 2.5em;
   font-weight: 600;
 
   cursor: pointer;

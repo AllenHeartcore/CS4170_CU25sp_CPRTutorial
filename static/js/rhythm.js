@@ -49,6 +49,8 @@ const ANIM_DUR_NEEDLE = 150;
 
 /* ------------------------------ Bookkeeping variables */
 
+const MAX_NTAPS = 30; // affect display instead of algorithm
+
 let taps = Array(QUEUE_SIZE).fill(null);
 let ntaps = 0; // counts all taps, for display, may exceed QUEUE_SIZE
 let firstTap = null;
@@ -82,7 +84,10 @@ function draw() {
     let colorBg, colorFg;
     // the color scheme should turn green
     // when the last gap is **starting** to close
-    if (fillAngle > ((QUEUE_SIZE - 1) / QUEUE_SIZE) * 360) {
+    if (
+        fillAngle > ((QUEUE_SIZE - 1) / QUEUE_SIZE) * 360 &&
+        ntaps <= MAX_NTAPS
+    ) {
         colorBg = DARK_GREEN;
         colorFg = BRIGHT_GREEN;
     } else {
@@ -202,6 +207,14 @@ function updateBPMDisplay(BPM, reset) {
     $("#bpmDisplayMinor").text("." + sBPM[1]);
     $("#tapsDisplay").text(ntaps.toString());
 
+    if (ntaps > MAX_NTAPS) {
+        $("#tapsDisplay").addClass("text-red");
+        $("#tapButton").text("STOP");
+    } else {
+        $("#tapsDisplay").removeClass("text-red");
+        $("#tapButton").text("TAP");
+    }
+
     $("#rhythmStatus").removeClass("text-red text-yellow text-green");
     $("#bpmDisplayMajor").removeClass("text-red text-yellow text-green");
     $("#bpmDisplayMinor").removeClass("text-red text-yellow text-green");
@@ -215,8 +228,13 @@ function updateBPMDisplay(BPM, reset) {
             $("#rhythmStatus").addClass("text-yellow");
         }
     } else {
-        $("#rhythmStatus").text("Stabilized!");
-        $("#rhythmStatus").addClass("text-green");
+        if (ntaps > MAX_NTAPS) {
+            $("#rhythmStatus").text("Too many taps");
+            $("#rhythmStatus").addClass("text-red");
+        } else {
+            $("#rhythmStatus").text("Stabilized!");
+            $("#rhythmStatus").addClass("text-green");
+        }
         if (BPM > M_VALID_MIN && BPM < M_VALID_MAX) {
             $("#bpmDisplayMajor").addClass("text-green");
             $("#bpmDisplayMinor").addClass("text-green");
