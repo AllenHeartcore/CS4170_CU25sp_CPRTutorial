@@ -9,3 +9,7 @@ function setFlag(flag) {
     },
   });
 }
+
+function setProgress(percent) {
+  $('.progress-bar').css('width', percent + '%');
+}

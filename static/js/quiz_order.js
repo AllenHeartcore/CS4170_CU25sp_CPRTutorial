@@ -207,7 +207,4 @@ $(function () {
         $form.submit()
 
     });
-    function setProgress(percent) {
-        $('.progress-bar').css('width', percent + '%');
-    }
 });

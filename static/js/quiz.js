@@ -142,9 +142,4 @@ $(function () {
     $form.submit();
     console.log(window.score)
   });
-
-  function setProgress(percent) {
-    $('.progress-bar').css('width', percent + '%');
-  }
-  
 });
