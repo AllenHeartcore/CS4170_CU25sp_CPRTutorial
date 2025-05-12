@@ -21,7 +21,8 @@ $(function () {
   }
 
   const correct = window.correctAnswer;
-
+  let percent = Math.round((_qid / _total) * 100);
+  setProgress(percent);
   $next.on("click", function (e) {
     e.preventDefault();
 
@@ -29,7 +30,7 @@ $(function () {
       let valid = false;
       let userAnswer = null;
 
-      // 用户答案提取
+      
       if (qType === "fill") {
         userAnswer = $.trim($("input[name='answer_text']").val());
         valid = userAnswer.length > 0;
@@ -134,21 +135,6 @@ $(function () {
       answered = true;
       
       return;
-
-
-      // if (!answered) {
-      //   $("#correctAnswerText").html(finalHtml);
-      //   $("#answerCard").removeClass("d-none");
-      //   answered = true;
-      
-      //   $('html, body').animate({
-      //     scrollTop: $("#answerCard").offset().top - 100
-      //   }, 300);
-      //   return;  // ✅ 防止立即跳转
-      // }
-      
-
-
     }
 
     // 第二次点击 → 跳转
@@ -156,4 +142,9 @@ $(function () {
     $form.submit();
     console.log(window.score)
   });
+
+  function setProgress(percent) {
+    $('.progress-bar').css('width', percent + '%');
+  }
+  
 });

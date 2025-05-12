@@ -16,6 +16,8 @@ $(function () {
         $boxes = $(".drop-box"),
         $form = $("#orderForm");
     let checked = false;
+    let percent = Math.round((_qid / _total) * 100);
+    setProgress(percent);
     // // Prev/Next buttons
     // if (_qid === 1) $prev.hide();
     // else
@@ -205,4 +207,7 @@ $(function () {
         $form.submit()
 
     });
+    function setProgress(percent) {
+        $('.progress-bar').css('width', percent + '%');
+    }
 });
