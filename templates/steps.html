@@ -8,6 +8,7 @@
 <!-- AJAX Interface -->
 <script>
   let id = {{ id | int }};
+  let total = {{ total | int }};
   let name = {{ name | tojson }};
   let details = {{ details | tojson }};
   let all_steps = {{ all_steps | tojson }};
@@ -15,11 +16,16 @@
 </script>
 
 <div id="pageElements" class="container d-flex flex-column">
+
+  <div class="progress-container mb-4">
+    <div class="progress-bar"></div>
+  </div>
+
   <div class="row">
     {% if id == 8 %}
     <div class="col-md-12 title">Step 5 Extra</div>
     {% else %}
-    <div class="col-md-12 title">Step {{ id }}</div>
+    <div class="col-md-12 title">Step {{ id }} / {{ total }}</div>
     {% endif %}
     <div class="col-md-12 subtitle mt-2">{{ name }}</div>
   </div>

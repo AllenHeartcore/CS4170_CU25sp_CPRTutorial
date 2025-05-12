@@ -2,6 +2,12 @@ const XIPHOID_VID = "uT3arOC9ZXc";
 const COMPRESSION_VID = "2PngCv7NjaI";
 
 $(document).ready(function () {
+  let _id = id;
+  if (_id === 8) {
+    _id = 5;
+  }
+  setProgress(Math.round((_id / total) * 100));
+
   if (id === 8) {
     $("#embeddedYoutubeVideo").attr(
       "src",

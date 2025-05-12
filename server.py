@@ -65,14 +65,15 @@ def home():
 
 @app.route("/steps/<id>")
 def steps(id):
-    id = 8 if id == "5extra" else int(id)
+    id = len(cpr_steps) if id == "5extra" else int(id)
     name = cpr_steps_names[id - 1]
     return render_template(
         "steps.html",
         id=id,
+        total=len(cpr_steps) - 1,
         name=name,
         details=cpr_steps[name],
-        all_steps=cpr_steps_names[:6],  # for Step 7
+        all_steps=cpr_steps_names[:-2],  # for Step 7
         flag_xiphoid_seen=FLAG_XIPHOID_SEEN,  # for Step 5/8
     )
 
