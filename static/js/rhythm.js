@@ -269,6 +269,9 @@ function updateBPM() {
 /* ------------------------------ Main */
 
 $(document).ready(function () {
+    const audio = $("#rhythmAssistAudio")[0]; // de-alias is mandatory
+    const toggle = $("#rhythmAssistToggle")[0];
+
     $("#tapButton").click(updateBPM);
 
     $("#rhythmHomeBtn").click(function () {
@@ -276,8 +279,6 @@ $(document).ready(function () {
     });
 
     $("#rhythmAssistToggle").click(function () {
-        const audio = $("#rhythmAssistAudio")[0]; // de-alias is mandatory
-        const toggle = $("#rhythmAssistToggle")[0];
         if (audio.paused) {
             audio.play();
             toggle.innerHTML = 'Music Assist <i class="bi bi-pause-fill"></i>';
@@ -285,5 +286,9 @@ $(document).ready(function () {
             audio.pause();
             toggle.innerHTML = 'Music Assist <i class="bi bi-play-fill"></i>';
         }
+    });
+
+    audio.addEventListener("ended", function () {
+        toggle.innerHTML = 'Music Assist <i class="bi bi-play-fill"></i>';
     });
 });
